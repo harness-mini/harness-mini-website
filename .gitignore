@@ -1,0 +1,17 @@
+# harness-mini: ephemeral runtime traces (checkpoints/ ARE committed)
+.trace/runtime/
+
+# dependencies & build output (also covered by site/.gitignore)
+node_modules/
+.next/
+out/
+build/
+
+# vercel
+.vercel
+
+# misc
+.DS_Store
+*.log
+*.tsbuildinfo
+.env*
