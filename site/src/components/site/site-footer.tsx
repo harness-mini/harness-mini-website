@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { GithubIcon } from "@/components/site/icons";
-import { REPO_URL, SITE_URL, DOCS_NAV } from "@/lib/site";
+import {
+  REPO_URL,
+  SITE_URL,
+  DOCS_NAV,
+  HARNESS_RELEASE,
+  HARNESS_VERSION,
+} from "@/lib/site";
 
 export function SiteFooter() {
   return (
@@ -14,6 +20,17 @@ export function SiteFooter() {
           <p className="max-w-xs text-sm text-muted-foreground">
             A minimal, CLI-agnostic agent harness. The harness is the
             environment, not a program.
+          </p>
+          <p className="font-mono text-xs text-muted-foreground/80">
+            documenting{" "}
+            <a
+              href={HARNESS_RELEASE.url}
+              target="_blank"
+              rel="noreferrer"
+              className="text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {HARNESS_VERSION}
+            </a>
           </p>
         </div>
 

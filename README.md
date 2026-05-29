@@ -76,6 +76,32 @@ production (https://harness-mini-website.vercel.app), and creates a GitHub
 Release with auto-generated notes. Requires repo secrets `VERCEL_TOKEN`,
 `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID`.
 
+## Staying current with harness-mini
+
+The site is a hand-curated mirror of the upstream framework, so it can drift as
+harness-mini iterates. One source of truth keeps it honest:
+
+- **`HARNESS_RELEASE`** in [`site/src/lib/site.ts`](site/src/lib/site.ts) is the
+  documented version (`tag` / `date` / `url` + a human `headline`). It's
+  rendered in the hero, the footer, and the "what's new" callout. `SKILLS` /
+  `AGENTS` in the same file are the documented inventory.
+- **`bin/sync-harness.mjs`** (Node, zero-dep) diffs upstream's real latest tag +
+  `skills/` + `agents/` inventory + `CHANGELOG.md` against what the site claims.
+  It **auto-bumps the version**, but **only flags content drift** — it never
+  writes prose. `harness/upstream-sync.json` records the provenance baseline.
+
+  ```bash
+  node bin/sync-harness.mjs --check   # report drift; exit 1 if behind (no writes)
+  node bin/sync-harness.mjs           # apply version bump + write the PR report
+  ```
+
+- **`.github/workflows/sync-harness-version.yml`** runs the detector daily (and
+  on demand). On drift it lints + builds, then opens a PR as `github-actions[bot]`
+  with an itemized report: which skills/agents to add or remove, the new
+  changelog section, and a checklist. **A human reviews, curates the prose, and
+  merges** — then a release tag ships it. So the version bump is automatic; the
+  content diff is surfaced, never silently missed.
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). In short: branch, make `npm run lint`

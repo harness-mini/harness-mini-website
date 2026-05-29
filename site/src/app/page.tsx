@@ -20,6 +20,9 @@ import { GithubIcon } from "@/components/site/icons";
 import { Terminal } from "@/components/site/terminal";
 import {
   AGENTS,
+  CHANGELOG_URL,
+  HARNESS_RELEASE,
+  HARNESS_VERSION,
   INSTALL_CMD,
   LIFECYCLE,
   REPO_URL,
@@ -86,7 +89,15 @@ export default function Home() {
           <div className="mx-auto max-w-3xl text-center">
             <Eyebrow>
               <span className="text-primary">❯</span>
-              minimal · CLI-agnostic · open source
+              minimal · CLI-agnostic ·{" "}
+              <a
+                href={HARNESS_RELEASE.url}
+                target="_blank"
+                rel="noreferrer"
+                className="text-foreground/90 transition-colors hover:text-primary"
+              >
+                {HARNESS_VERSION}
+              </a>
             </Eyebrow>
             <h1 className="mt-6 text-4xl font-semibold tracking-tight sm:text-6xl">
               A minimal, CLI-agnostic{" "}
@@ -135,6 +146,27 @@ export default function Home() {
             <div className="mx-auto mt-12 max-w-xl text-left">
               <Terminal command={INSTALL_CMD} label="install" />
             </div>
+
+            <p className="mx-auto mt-4 max-w-xl text-center text-xs text-muted-foreground">
+              What&apos;s new in{" "}
+              <a
+                href={HARNESS_RELEASE.url}
+                target="_blank"
+                rel="noreferrer"
+                className="font-mono text-foreground/90 transition-colors hover:text-primary"
+              >
+                {HARNESS_VERSION}
+              </a>
+              : {HARNESS_RELEASE.headline}{" "}
+              <a
+                href={CHANGELOG_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="text-primary/90 underline-offset-4 transition-colors hover:text-primary hover:underline"
+              >
+                Changelog →
+              </a>
+            </p>
 
             <dl className="mx-auto mt-10 grid max-w-2xl grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-4">
               {STATS.map((s) => (

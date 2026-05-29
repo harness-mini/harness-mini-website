@@ -1,0 +1,73 @@
+name: Sync harness-mini
+
+# Keeps the site honest as the upstream framework iterates. Daily (and on
+# demand) it diffs upstream's real version + skill/agent inventory against what
+# the site claims (bin/sync-harness.mjs). On drift it bumps the documented
+# version, refreshes the provenance baseline, and opens a PR — authored by
+# github-actions[bot] — with an itemized report for a human to curate + merge.
+#
+# A PR opened with the default GITHUB_TOKEN does NOT trigger ci.yml (GitHub's
+# recursion guard), so this job runs lint + build itself before opening the PR.
+
+on:
+  schedule:
+    - cron: "0 9 * * *" # daily, 09:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write # commit the bump on the PR branch
+  pull-requests: write # open the PR
+
+concurrency:
+  group: sync-harness
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Detect drift & open PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - name: Detect drift & apply version bump
+        id: sync
+        env:
+          GITHUB_TOKEN: ${{ github.token }} # API rate limits
+        run: node bin/sync-harness.mjs
+
+      # Everything below only runs when there is drift to surface.
+      - name: Install dependencies
+        if: steps.sync.outputs.drift == 'true'
+        working-directory: site
+        run: npm ci
+
+      - name: Lint
+        if: steps.sync.outputs.drift == 'true'
+        working-directory: site
+        run: npm run lint
+
+      - name: Build
+        if: steps.sync.outputs.drift == 'true'
+        working-directory: site
+        run: npm run build
+
+      - name: Open sync PR
+        if: steps.sync.outputs.drift == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ github.token }}
+          branch: chore/harness-sync
+          delete-branch: true
+          base: main
+          commit-message: "chore: sync harness-mini ${{ steps.sync.outputs.tag }}"
+          title: "chore: sync harness-mini ${{ steps.sync.outputs.tag }}"
+          body-path: .sync-report.md
+          labels: harness-sync

@@ -90,7 +90,7 @@ intake → prd → issues → implement ⇄ evaluate → checkpoint → done
 | Layer | Where | Notes |
 |-------|-------|-------|
 | Types / Config | `site/globals.css` theme tokens, `components.json`, `next.config.ts`, `tsconfig.json`, `eslint.config.mjs` | dark terminal OKLCH palette + Tailwind v4 utilities |
-| Repo / Data | `site/src/lib/site.ts`, `site/src/lib/utils.ts` | single source for nav, skills, agents, lifecycle, references; `cn()` |
+| Repo / Data | `site/src/lib/site.ts`, `site/src/lib/utils.ts` | single source for nav, skills, agents, lifecycle, references, `HARNESS_RELEASE` (documented upstream version); `cn()` |
 | Service / Components | `site/src/components/ui/*` (shadcn), `site/src/components/site/*` (header, footer, terminal, prose, primitives, icons, docs-sidebar) | reusable, typed |
 | Runtime / UI | `site/src/app/**` route tree | RSC by default; header, docs-sidebar, terminal are `"use client"` |
 
@@ -98,6 +98,13 @@ intake → prd → issues → implement ⇄ evaluate → checkpoint → done
 
 **Rendering:** fully static prerender (SSG), zero runtime dependencies — deploys
 to any static Next.js host (e.g. Vercel).
+
+**Upstream sync:** the site mirrors the upstream framework, so `bin/sync-harness.mjs`
+(zero-dep Node) diffs upstream's latest tag + `skills/`/`agents/` inventory +
+changelog against `site.ts`, auto-bumps `HARNESS_RELEASE`, and flags content
+drift for a human. `harness/upstream-sync.json` is the provenance baseline;
+`.github/workflows/sync-harness-version.yml` runs it daily and opens a PR on
+drift.
 
 Active plan: `docs/exec-plans/active/0001-website.md` · latest checkpoint:
 `.trace/checkpoints/website-0001.md`.

@@ -57,6 +57,22 @@ site, deploys it to **Vercel production**, and publishes a GitHub Release with
 auto-generated notes. (Requires repo secrets `VERCEL_TOKEN`, `VERCEL_ORG_ID`,
 `VERCEL_PROJECT_ID`.)
 
+## Keeping in sync with upstream
+
+A daily job (`.github/workflows/sync-harness-version.yml`, also runnable via
+**workflow_dispatch**) compares this site against the upstream
+[harness-mini](https://github.com/harness-mini/harness-mini) repo using
+`bin/sync-harness.mjs`. When upstream tags a release or changes its skill/agent
+inventory, the bot auto-bumps the documented version and opens a PR
+(`github-actions[bot]`) with an itemized drift report. To triage it:
+
+1. Read the report in the PR body: add/remove the listed skills & agents in
+   `site/src/lib/site.ts`, and curate `HARNESS_RELEASE.headline` from the
+   changelog section it quotes.
+2. Update any affected docs pages under `site/src/app/docs/`.
+3. Make `npm run lint` + `npm run build` green, then merge. Cut a release tag to
+   ship it. Run `node bin/sync-harness.mjs --check` anytime to check drift locally.
+
 ## How this repo is organized (harness-mini)
 
 This project is developed through the harness-mini lifecycle, so substantial
