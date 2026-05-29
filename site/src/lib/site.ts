@@ -4,6 +4,26 @@ export const INSTALL_CMD =
   "git clone https://github.com/harness-mini/harness-mini.git\nbash harness-mini/init.sh /path/to/your/project";
 export const ONE_LINER_INSTALL = 'tell your agent: "install harness-mini here"';
 
+/**
+ * The harness-mini release this site documents.
+ * `tag` / `date` / `url` are auto-bumped by the sync bot
+ * (`.github/workflows/sync-harness-version.yml` → `bin/sync-harness.mjs`);
+ * `headline` is human-curated from the upstream CHANGELOG. The `x-release-*`
+ * markers are the anchors the bot rewrites — keep them on these lines.
+ */
+export const HARNESS_RELEASE = {
+  tag: "v0.1.0", // x-release-tag
+  date: "2026-05-29", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.1.0", // x-release-url
+  headline: "New harness CLI — version · update · release.",
+} as const;
+
+/** Short version string, derived from {@link HARNESS_RELEASE}. */
+export const HARNESS_VERSION = HARNESS_RELEASE.tag;
+
+/** Link to the upstream changelog (the "what's new" source). */
+export const CHANGELOG_URL = `${REPO_URL}/blob/main/CHANGELOG.md`;
+
 export const NAV = [
   { href: "/#the-40-line", label: "The 40% line" },
   { href: "/#lifecycle", label: "Lifecycle" },
@@ -67,6 +87,7 @@ export const SKILLS: Skill[] = [
   { name: "clean-code", stage: "implement", blurb: "The forward quality constraint: intention-revealing names, small functions, no duplication, why-not-what comments." },
   { name: "refactor", stage: "implement", blurb: "The recovery constraint: smell → named refactoring, always under green tests, one move at a time." },
   { name: "evaluate", stage: "evaluate", blurb: "Grade work against acceptance criteria from a separate window. The anti-self-praise firewall." },
+  { name: "release", stage: "maintain", blurb: "Cut a versioned release — bump VERSION, roll the CHANGELOG, tag, and publish a GitHub release. Wraps bin/harness.sh release; owns the semver + changelog judgment the script can't." },
   { name: "garden", stage: "maintain", blurb: "Entropy GC: scan for drift — stale docs, dead context, smells — and open small targeted fixes." },
 ];
 

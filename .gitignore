@@ -15,3 +15,6 @@ build/
 *.log
 *.tsbuildinfo
 .env*
+
+# harness-mini sync: transient PR-body report (bin/sync-harness.mjs)
+.sync-report.md
