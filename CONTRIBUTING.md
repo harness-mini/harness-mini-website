@@ -39,7 +39,23 @@ You need Node.js 20+ (CI runs on Node 22).
 3. Ensure `npm run lint` and `npm run build` are green locally.
 4. Open a PR against `main`. **CI must pass** (lint + build) before merge, and
    Vercel will attach a preview deployment to the PR.
-5. On merge to `main`, Vercel deploys to production automatically.
+5. On merge to `main`, nothing ships to production — `main` is preview-only.
+   Production is **release-gated** (see below).
+
+## Releasing
+
+Production deploys are driven by semver tags, not by merges to `main`:
+
+```bash
+git checkout main && git pull
+git tag v0.1.0          # bump per semver
+git push origin v0.1.0
+```
+
+Pushing a `vX.Y.Z` tag runs `.github/workflows/release.yml`, which builds the
+site, deploys it to **Vercel production**, and publishes a GitHub Release with
+auto-generated notes. (Requires repo secrets `VERCEL_TOKEN`, `VERCEL_ORG_ID`,
+`VERCEL_PROJECT_ID`.)
 
 ## How this repo is organized (harness-mini)
 

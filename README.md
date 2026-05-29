@@ -1,6 +1,8 @@
 # harness-mini-website
 
 [![CI](https://github.com/harness-mini/harness-mini-website/actions/workflows/ci.yml/badge.svg)](https://github.com/harness-mini/harness-mini-website/actions/workflows/ci.yml)
+[![Release](https://github.com/harness-mini/harness-mini-website/actions/workflows/release.yml/badge.svg)](https://github.com/harness-mini/harness-mini-website/actions/workflows/release.yml)
+[![Latest release](https://img.shields.io/github/v/release/harness-mini/harness-mini-website?sort=semver)](https://github.com/harness-mini/harness-mini-website/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Live](https://img.shields.io/badge/live-harness--mini--website.vercel.app-000?logo=vercel)](https://harness-mini-website.vercel.app)
 
@@ -53,10 +55,26 @@ npm start        # serve the production build
   `npm run lint`, and `npm run build` (in `site/`) on every push to `main` and
   on pull requests. It mirrors the production build, so breakage is caught
   before merge.
-- **CD** — handled by **Vercel's Git integration**: every push to `main`
-  deploys to production and every PR gets a preview deployment. The Vercel
-  project's **Root Directory** is set to `site/`. There is deliberately no
-  deploy job in CI (it would double-deploy).
+- **Previews** — Vercel's Git integration builds a preview deployment for every
+  pull request. Pushes to `main` do **not** auto-deploy to production
+  (disabled in [`site/vercel.json`](site/vercel.json)).
+- **Production is release-gated** — [`.github/workflows/release.yml`](.github/workflows/release.yml)
+  deploys to Vercel **production** on a semver tag (`vX.Y.Z`) via the Vercel CLI,
+  then publishes a GitHub Release with generated notes. The Vercel project's
+  **Root Directory** is `site/`.
+
+## Releasing
+
+```bash
+git checkout main && git pull
+git tag v0.1.0          # bump per semver
+git push origin v0.1.0
+```
+
+Pushing the tag runs the **Release** workflow: it builds the site, deploys it to
+production (https://harness-mini-website.vercel.app), and creates a GitHub
+Release with auto-generated notes. Requires repo secrets `VERCEL_TOKEN`,
+`VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID`.
 
 ## Contributing
 
