@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { GithubIcon } from "@/components/site/icons";
-import { REPO_URL, DOCS_NAV } from "@/lib/site";
+import { REPO_URL, SITE_URL, DOCS_NAV } from "@/lib/site";
 
 export function SiteFooter() {
   return (
@@ -59,6 +59,14 @@ export function SiteFooter() {
                 className="text-muted-foreground transition-colors hover:text-foreground"
               >
                 Install guide
+              </a>
+            </li>
+            <li>
+              <a
+                href={SITE_URL}
+                className="text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Live site
               </a>
             </li>
           </ul>

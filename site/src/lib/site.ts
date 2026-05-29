@@ -1,4 +1,5 @@
 export const REPO_URL = "https://github.com/harness-mini/harness-mini";
+export const SITE_URL = "https://harness-mini-website.vercel.app";
 export const INSTALL_CMD =
   "git clone https://github.com/harness-mini/harness-mini.git\nbash harness-mini/init.sh /path/to/your/project";
 export const ONE_LINER_INSTALL = 'tell your agent: "install harness-mini here"';

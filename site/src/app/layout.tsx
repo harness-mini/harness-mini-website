@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
+import { SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-sans",
@@ -15,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://harness-mini.dev"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "harness-mini — a minimal, CLI-agnostic agent harness",
     template: "%s · harness-mini",
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     title: "harness-mini — a minimal, CLI-agnostic agent harness",
     description:
       "Convention + skills + sub-agents + distilled best-practice docs, with only thin shell glue as code.",
-    url: "https://harness-mini.dev",
+    url: SITE_URL,
     siteName: "harness-mini",
     type: "website",
   },
