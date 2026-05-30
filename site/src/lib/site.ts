@@ -12,10 +12,10 @@ export const ONE_LINER_INSTALL = 'tell your agent: "install harness-mini here"';
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.1.0", // x-release-tag
-  date: "2026-05-29", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.1.0", // x-release-url
-  headline: "New harness CLI — version · update · release.",
+  tag: "v0.3.0", // x-release-tag
+  date: "2026-05-30", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.3.0", // x-release-url
+  headline: "harness.sh gains doctor + status; risk-tiered evaluation (L0/L1/L2).",
 } as const;
 
 /** Short version string, derived from {@link HARNESS_RELEASE}. */

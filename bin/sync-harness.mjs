@@ -43,13 +43,20 @@ async function gh(path, { raw = false } = {}) {
   return raw ? res.text() : res.json();
 }
 
-/** Names of `.md` files in an upstream directory (the skill/agent inventory). */
+/**
+ * Skill/agent names in an upstream directory. Handles both layouts upstream has
+ * used: flat `<name>.md` files and per-entry `<name>/` subdirectories.
+ * An empty result means a fetch/layout problem — NOT that upstream deleted its
+ * whole catalog — so we throw rather than ever propose wiping the inventory.
+ */
 async function inventory(dir) {
   const entries = await gh(`/repos/${REPO}/contents/${dir}`);
-  return entries
-    .filter((e) => e.type === "file" && e.name.endsWith(".md"))
+  const names = entries
+    .filter((e) => e.type === "dir" || (e.type === "file" && e.name.endsWith(".md")))
     .map((e) => e.name.replace(/\.md$/, ""))
     .sort();
+  if (names.length === 0) throw new Error(`Upstream ${dir}/ inventory came back empty — refusing to treat as drift`);
+  return names;
 }
 
 /** The newest released `## [x.y.z]` section of a Keep-a-Changelog file. */
