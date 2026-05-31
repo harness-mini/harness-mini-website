@@ -10,13 +10,16 @@ export const metadata: Metadata = {
 
 const LAYOUT = `AGENTS.md              # ~100-line map injected every run (table of contents)
 ARCHITECTURE.md        # this file
+VERSION                # canonical version (e.g. 0.3.0)
 init.sh                # additive, idempotent installer (new vs existing)
 bin/
+  harness.sh           # front-door CLI: version · update · release · doctor · status
+  _harness_lib.sh      # shared helpers (managed set, checksums, lockfile)
   ctx.sh               # context % estimate vs the 40% threshold
   trace.sh             # append runtime JSONL (best-effort, never blocks)
   ralph.sh             # ralph-loop driver (work → check → repeat)
-skills/                # source skills → installed to .claude/skills/
-agents/                # source sub-agents → installed to .claude/agents/
+skills/                # source skills: skills/<name>/SKILL.md → .claude/skills/
+agents/                # source sub-agents: <name>.md → .claude/agents/
 docs/
   principles.md        # golden principles + Five-Step core-mind
   smart-dumb.md        # the 40% occupancy contract
@@ -25,7 +28,9 @@ docs/
     completed/         # archived plans (committed)
   references/          # *-llms.txt distillates of the source blogs
 tests/run.sh           # zero-dep TDD suite for bin/* and init.sh
-harness/manifest.md    # neutral pointer list for non-Claude CLIs
+harness/
+  manifest.md          # neutral pointer list for non-Claude CLIs
+  harness.lock         # version + pristine checksums of managed files
 .trace/
   checkpoints/         # COMMITTED — decisions, milestones, handoffs
   runtime/             # GITIGNORED — ephemeral per-run JSONL`;
@@ -50,6 +55,14 @@ export default function ArchitecturePage() {
         <h2>Repository layout</h2>
       </Prose>
       <CodeBlock>{LAYOUT}</CodeBlock>
+      <Prose className="mt-2">
+        <p>
+          <code>bin/harness.sh</code> is the front door: <code>version</code>,{" "}
+          <code>update</code> (checksum-guarded sync that keeps your edits) and{" "}
+          <code>release</code>, plus <code>doctor</code> (an install health check)
+          and <code>status</code> (current work state for a cold resume).
+        </p>
+      </Prose>
 
       <Prose className="mt-2">
         <h2>Lifecycle FSM</h2>
@@ -66,7 +79,10 @@ export default function ArchitecturePage() {
             a stage, but only the <strong>main agent</strong> (via{" "}
             <code>stage-viewer</code>) advances the FSM. No sub-agent may mark its
             own output “done” — the evaluator gate plus main-agent control is the
-            anti-self-praise firewall extended across the whole lifecycle.
+            anti-self-praise firewall, extended across the whole lifecycle.
+            Evaluation is <strong>tiered by risk</strong> (L0 self-check · L1
+            lightweight reviewer · L2 full Opus); the firewall is the{" "}
+            <em>separate context</em>, not the model.
           </li>
         </ul>
 

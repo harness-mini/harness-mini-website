@@ -86,7 +86,7 @@ export const SKILLS: Skill[] = [
   { name: "slice-coding", stage: "implement", blurb: "Vertical (one feature end-to-end first) + horizontal (forward-only layering). Read before writing code." },
   { name: "clean-code", stage: "implement", blurb: "The forward quality constraint: intention-revealing names, small functions, no duplication, why-not-what comments." },
   { name: "refactor", stage: "implement", blurb: "The recovery constraint: smell → named refactoring, always under green tests, one move at a time." },
-  { name: "evaluate", stage: "evaluate", blurb: "Grade work against acceptance criteria from a separate window. The anti-self-praise firewall." },
+  { name: "evaluate", stage: "evaluate", blurb: "Grade work against acceptance criteria from a separate context, tiered by risk: L0 self-check · L1 lightweight reviewer (default) · L2 full Opus. The firewall is the separate context, not the model." },
   { name: "release", stage: "maintain", blurb: "Cut a versioned release — bump VERSION, roll the CHANGELOG, tag, and publish a GitHub release. Wraps bin/harness.sh release; owns the semver + changelog judgment the script can't." },
   { name: "garden", stage: "maintain", blurb: "Entropy GC: scan for drift — stale docs, dead context, smells — and open small targeted fixes." },
 ];
@@ -101,7 +101,7 @@ export type Agent = {
 export const AGENTS: Agent[] = [
   { name: "planner", role: "goal → exec-plan + issues", model: "sonnet", blurb: "Expands a goal into a committed PRD and atomic issues. Runs the founder funnel on new projects. Writes no production code." },
   { name: "generator", role: "build one slice via TDD", model: "sonnet", blurb: "Implements one issue at a time, test-first, under the layering contract. Hands the slice to the evaluator — never grades its own work." },
-  { name: "evaluator", role: "grade vs criteria", model: "opus", blurb: "Grades work against acceptance criteria from a separate context window. Verifies by running tests/app; returns pass/fail with evidence." },
+  { name: "evaluator", role: "grade vs criteria", model: "opus", blurb: "Grades work from a separate context window — the firewall. Evaluation scales with risk (L0/L1/L2); the L2 Opus pass is reserved for high-stakes work. Verifies by running tests/app; returns pass/fail with evidence." },
   { name: "explorer", role: "disposable read/search → distillate", model: "haiku", blurb: "Read-only fan-out. Burns its own context on heavy searches, returns a short distillate, and dies. The context firewall." },
   { name: "gardener", role: "entropy GC / doc-gardening", model: "haiku", blurb: "Periodically scans for drift and opens small, green, one-move fixes. Keeps the repo coherent and the smart zone smart." },
 ];
