@@ -1,7 +1,7 @@
 ---
 plan: v030-content-refresh
 seq: 0006
-stage: implement
+stage: done
 owner: main
 eval: L1
 ---
@@ -30,16 +30,16 @@ filed as GitHub issues #4–#6 first (per request), then fixed in one PR.
   and shows flat skills instead of `skills/<name>/SKILL.md` folders (v0.2.0).
 
 ## Acceptance criteria
-- [ ] **#4** `site.ts` `evaluate` skill + `evaluator` agent blurbs convey tiering
+- [x] **#4** `site.ts` `evaluate` skill + `evaluator` agent blurbs convey tiering
       (L0/L1/L2, firewall = separate context); `architecture/page.tsx` firewall
       note clarified. No claim that evaluation is "always Opus".
-- [ ] **#5** `/docs/principles` includes "The Mini constraint" (shell-or-doc
+- [x] **#5** `/docs/principles` includes "The Mini constraint" (shell-or-doc
       first · no env dependence · no complex languages · delete before you add).
-- [ ] **#6** `architecture/page.tsx` `LAYOUT` shows `harness.sh` +
+- [x] **#6** `architecture/page.tsx` `LAYOUT` shows `harness.sh` +
       `_harness_lib.sh` + `VERSION` + `harness/harness.lock` + skill-folder shape,
       with a one-line `doctor`/`status` mention.
-- [ ] `npm run lint` + `npm run build` green (10 static routes); content renders.
-- [ ] PR opened that **Closes #4, #5, #6**; independent (L1) evaluator passes.
+- [x] `npm run lint` + `npm run build` green (10 static routes); content renders.
+- [x] PR opened that **Closes #4, #5, #6**; independent (L1) evaluator passes.
 
 ## Vertical slices (build order)
 1. `site.ts` blurbs (#4) — propagates to landing skills/agents sections.
@@ -56,7 +56,9 @@ filed as GitHub issues #4–#6 first (per request), then fixed in one PR.
 - Out of scope: 40%-tunable enrichment (already accurate), new CLI route/section.
 
 ## Now
-- Stage = `implement`. Issues #4–#6 filed. Building slice 1.
+- Stage = `done`. Independent **L1** reviewer PASSed 5/5 (accuracy checked vs the
+  upstream CHANGELOG + live repo; build green; content renders). PR #7 (Closes
+  #4–#6) awaiting merge. Plan archived to `completed/`.
 
 ## Next (resume here)
 1. Implement slices 1–3; lint+build.
