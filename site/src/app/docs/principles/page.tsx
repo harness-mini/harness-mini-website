@@ -5,7 +5,7 @@ import { DocFooterNav } from "@/components/site/doc-footer-nav";
 export const metadata: Metadata = {
   title: "Principles & core-mind",
   description:
-    "Musk's Five-Step Algorithm, the golden principles that keep agent-generated code coherent, and the clean-code / refactor quality spine.",
+    "The Mini constraint, Musk's Five-Step Algorithm, the golden principles that keep agent-generated code coherent, and the clean-code / refactor quality spine.",
 };
 
 export default function PrinciplesPage() {
@@ -24,6 +24,31 @@ export default function PrinciplesPage() {
           agent-generated codebase readable and coherent for the <em>next</em>{" "}
           agent run. Taste, encoded once, applied to every line.
         </blockquote>
+
+        <h2>The Mini constraint</h2>
+        <p>
+          What keeps harness-mini <em>mini</em> — every addition must clear a
+          high bar, or it doesn&apos;t go in:
+        </p>
+        <ul>
+          <li>
+            <strong>Shell-or-doc first.</strong> Prefer a Markdown convention or a
+            few lines of POSIX shell over a program. The harness <em>is</em> the
+            environment, not an app to run.
+          </li>
+          <li>
+            <strong>No environment dependence.</strong> No build step, no runtime,
+            no services to stand up — it works wherever a shell does.
+          </li>
+          <li>
+            <strong>No complex languages.</strong> Glue stays thin and readable;
+            nothing that needs a toolchain just to execute.
+          </li>
+          <li>
+            <strong>Delete before you add.</strong> The default answer to “add
+            this?” is no — subtract until what remains is load-bearing.
+          </li>
+        </ul>
 
         <h2>Core-mind: Musk&apos;s Five-Step Algorithm</h2>
         <p>
