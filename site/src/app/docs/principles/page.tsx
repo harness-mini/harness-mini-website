@@ -111,8 +111,10 @@ export default function PrinciplesPage() {
             <em>how</em> a solution is expressed inside those boundaries.
           </li>
           <li>
-            <strong>Parse at the boundary.</strong> Validate data shapes where they
-            enter the system; don&apos;t probe untyped blobs by guessing structure.
+            <strong>Type the boundary; never guess the shape.</strong> Depend on a
+            typed SDK/client — acquire types from the source. Where no typed SDK
+            exists, parse and validate at the seam; nothing downstream may build on
+            a guessed or untyped structure.
           </li>
           <li>
             <strong>Prefer shared utilities over hand-rolled helpers</strong>, so

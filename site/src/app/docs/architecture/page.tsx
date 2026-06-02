@@ -111,7 +111,9 @@ export default function ArchitecturePage() {
           The rule: <em>a vertical slice proves the path; then expand horizontally</em>{" "}
           across features within the same layered contract. Enforce mechanically
           where the project allows (lint / structure tests); the generator reads
-          this before writing code.
+          this before writing code. Once the skeleton passes evaluate, the{" "}
+          <code>parallel-slices</code> skill fans that horizontal expansion out to
+          several generators at once — gated on <strong>disjoint file footprints</strong>.
         </p>
 
         <h2>New vs existing project (set by init.sh)</h2>
@@ -127,6 +129,15 @@ export default function ArchitecturePage() {
             the founder funnel; install additively without overwriting anything.
           </li>
         </ul>
+        <p>
+          Either way, install seeds a <strong>routing gate</strong> into each
+          CLI&apos;s always-on file — <code>CLAUDE.md</code>,{" "}
+          <code>.cursor/rules/</code>, <code>AGENTS.md</code> — so the harness is
+          preferred by default: route non-trivial work through{" "}
+          <code>stage-viewer</code> first, and when a harness skill and another
+          tool both fit, the harness skill wins. Additive and idempotent — an
+          existing <code>CLAUDE.md</code> is never clobbered.
+        </p>
       </Prose>
 
       <DocFooterNav
