@@ -1,7 +1,7 @@
 ---
 plan: v041-content-refresh
 seq: 0007
-stage: implement
+stage: done
 owner: main
 eval: L1
 ---
@@ -22,14 +22,14 @@ drift to fix, filed as issues #9–#11 first, then one PR.
   separate bot run).
 
 ## Acceptance criteria
-- [ ] **#9** `site.ts` SKILLS includes `parallel-slices` (count → 16); a clause
+- [x] **#9** `site.ts` SKILLS includes `parallel-slices` (count → 16); a clause
       in `architecture/page.tsx`'s horizontal-expansion note points at it.
-- [ ] **#10** `/docs/principles` principle #5 reads "Type the boundary; never
+- [x] **#10** `/docs/principles` principle #5 reads "Type the boundary; never
       guess the shape" (typed SDK first; parse+validate at the seam otherwise).
-- [ ] **#11** `architecture/page.tsx` "new vs existing install" notes the routing
+- [x] **#11** `architecture/page.tsx` "new vs existing install" notes the routing
       gate (stage-viewer first; harness skill wins; additive/idempotent).
-- [ ] `HARNESS_RELEASE` = v0.4.1 (date/url) + a current headline; provenance updated.
-- [ ] `npm run lint` + `npm run build` green; content renders. PR closes #9–#11;
+- [x] `HARNESS_RELEASE` = v0.4.1 (date/url) + a current headline; provenance updated.
+- [x] `npm run lint` + `npm run build` green; content renders. PR closes #9–#11;
       independent L1 reviewer passes.
 
 ## Vertical slices (build order)
@@ -46,7 +46,9 @@ drift to fix, filed as issues #9–#11 first, then one PR.
 - Out of scope: landing-page changes (keep the refresh in /docs + data).
 
 ## Now
-- Stage = `implement`. Issues #9–#11 filed. Building slice 1.
+- Stage = `done`. Independent **L1** reviewer PASSed 5/5 (accuracy checked vs
+  CHANGELOG + live skills inventory; build green; `--check` drift-free). PR #12
+  (Closes #9–#11) awaiting merge. Plan archived to `completed/`.
 
 ## Next (resume here)
 1. Slices 1–3; lint+build. 2. PR closing #9–#11; hand to independent L1 reviewer.
