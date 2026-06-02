@@ -12,10 +12,10 @@ export const ONE_LINER_INSTALL = 'tell your agent: "install harness-mini here"';
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.4.0", // x-release-tag
-  date: "2026-06-01", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.4.0", // x-release-url
-  headline: "harness.sh gains doctor + status; risk-tiered evaluation (L0/L1/L2).",
+  tag: "v0.4.1", // x-release-tag
+  date: "2026-06-02", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.4.1", // x-release-url
+  headline: "Routing gate makes the harness preferred by default; parallel-slices fans out the implement stage.",
 } as const;
 
 /** Short version string, derived from {@link HARNESS_RELEASE}. */
@@ -84,6 +84,7 @@ export const SKILLS: Skill[] = [
   { name: "to-issues", stage: "plan", blurb: "Decompose a PRD into atomic, independently verifiable issues — one vertical slice each." },
   { name: "tdd", stage: "implement", blurb: "Red → green → refactor. Never write implementation before a failing test; never refactor on red." },
   { name: "slice-coding", stage: "implement", blurb: "Vertical (one feature end-to-end first) + horizontal (forward-only layering). Read before writing code." },
+  { name: "parallel-slices", stage: "implement", blurb: "The implement stage's write fan-out: once the vertical skeleton passes evaluate, build the independent issues in parallel — one generator each, gated on disjoint file footprints — then a single integration evaluate." },
   { name: "clean-code", stage: "implement", blurb: "The forward quality constraint: intention-revealing names, small functions, no duplication, why-not-what comments." },
   { name: "refactor", stage: "implement", blurb: "The recovery constraint: smell → named refactoring, always under green tests, one move at a time." },
   { name: "evaluate", stage: "evaluate", blurb: "Grade work against acceptance criteria from a separate context, tiered by risk: L0 self-check · L1 lightweight reviewer (default) · L2 full Opus. The firewall is the separate context, not the model." },
