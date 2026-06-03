@@ -5,7 +5,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { JsonLd } from "@/components/site/json-ld";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, SITE_DESCRIPTION } from "@/lib/site";
 import { WEBSITE_JSONLD, ORGANIZATION_JSONLD } from "@/lib/structured-data";
 
 const geistSans = Geist({
@@ -24,8 +24,7 @@ export const metadata: Metadata = {
     default: "harness-mini — a minimal, CLI-agnostic agent harness",
     template: "%s · harness-mini",
   },
-  description:
-    "A minimal, CLI-agnostic agent harness: convention + skills + sub-agents + distilled best-practice docs, with only thin shell glue as code. The harness is the environment, not a program.",
+  description: SITE_DESCRIPTION,
   applicationName: "harness-mini",
   keywords: [
     "agent harness",

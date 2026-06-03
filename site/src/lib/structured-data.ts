@@ -1,7 +1,6 @@
-import { SITE_URL, REPO_URL, HARNESS_VERSION } from "@/lib/site";
+import { SITE_URL, REPO_URL, HARNESS_VERSION, SITE_DESCRIPTION } from "@/lib/site";
 
-const DESCRIPTION =
-  "A minimal, CLI-agnostic agent harness: convention + skills + sub-agents + distilled best-practice docs, with only thin shell glue as code. The harness is the environment, not a program.";
+const DESCRIPTION = SITE_DESCRIPTION;
 
 /** Site-wide: the website itself. */
 export const WEBSITE_JSONLD: Record<string, unknown> = {
