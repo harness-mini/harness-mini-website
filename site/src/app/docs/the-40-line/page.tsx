@@ -4,6 +4,7 @@ import { DocFooterNav } from "@/components/site/doc-footer-nav";
 
 export const metadata: Metadata = {
   title: "The 40% line",
+  alternates: { canonical: "/docs/the-40-line" },
   description:
     "The smart/dumb contract — keep every agent's context in the smart zone. Sub-agent fan-out, checkpoint-and-reset at 40%, and progressive disclosure.",
 };

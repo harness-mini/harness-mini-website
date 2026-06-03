@@ -4,6 +4,7 @@ import { DocFooterNav } from "@/components/site/doc-footer-nav";
 
 export const metadata: Metadata = {
   title: "Architecture",
+  alternates: { canonical: "/docs/architecture" },
   description:
     "Repository layout, the lifecycle FSM, the horizontal+vertical coding contract, and how install behaves on new vs existing projects.",
 };

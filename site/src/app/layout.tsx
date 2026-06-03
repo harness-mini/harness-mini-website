@@ -4,7 +4,9 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
-import { SITE_URL } from "@/lib/site";
+import { JsonLd } from "@/components/site/json-ld";
+import { SITE_URL, SITE_DESCRIPTION } from "@/lib/site";
+import { WEBSITE_JSONLD, ORGANIZATION_JSONLD } from "@/lib/structured-data";
 
 const geistSans = Geist({
   variable: "--font-sans",
@@ -22,8 +24,8 @@ export const metadata: Metadata = {
     default: "harness-mini — a minimal, CLI-agnostic agent harness",
     template: "%s · harness-mini",
   },
-  description:
-    "A minimal, CLI-agnostic agent harness: convention + skills + sub-agents + distilled best-practice docs, with only thin shell glue as code. The harness is the environment, not a program.",
+  description: SITE_DESCRIPTION,
+  applicationName: "harness-mini",
   keywords: [
     "agent harness",
     "LLM agents",
@@ -34,6 +36,10 @@ export const metadata: Metadata = {
     "harness-mini",
   ],
   authors: [{ name: "harness-mini" }],
+  creator: "harness-mini",
+  publisher: "harness-mini",
+  // Default canonical for the landing page; each docs page overrides its own.
+  alternates: { canonical: "/" },
   openGraph: {
     title: "harness-mini — a minimal, CLI-agnostic agent harness",
     description:
@@ -73,6 +79,8 @@ export default function RootLayout({
         </main>
         <SiteFooter />
         <Analytics />
+        <JsonLd data={WEBSITE_JSONLD} />
+        <JsonLd data={ORGANIZATION_JSONLD} />
       </body>
     </html>
   );

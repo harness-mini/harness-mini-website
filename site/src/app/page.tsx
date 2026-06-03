@@ -18,6 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Container, Eyebrow, ModelBadge } from "@/components/site/primitives";
 import { GithubIcon } from "@/components/site/icons";
 import { Terminal } from "@/components/site/terminal";
+import { JsonLd } from "@/components/site/json-ld";
 import {
   AGENTS,
   CHANGELOG_URL,
@@ -30,6 +31,7 @@ import {
   STAGE_LABEL,
   type StageKey,
 } from "@/lib/site";
+import { SOFTWARE_JSONLD } from "@/lib/structured-data";
 
 const STATS = [
   { value: String(SKILLS.length), label: "skills" },
@@ -77,6 +79,7 @@ const MECHANISMS = [
 export default function Home() {
   return (
     <>
+      <JsonLd data={SOFTWARE_JSONLD} />
       {/* ── Hero ─────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden border-b border-border/80">
         <div aria-hidden className="absolute inset-0 bg-grid opacity-60" />
