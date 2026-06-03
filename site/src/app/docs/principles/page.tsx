@@ -4,6 +4,7 @@ import { DocFooterNav } from "@/components/site/doc-footer-nav";
 
 export const metadata: Metadata = {
   title: "Principles & core-mind",
+  alternates: { canonical: "/docs/principles" },
   description:
     "The Mini constraint, Musk's Five-Step Algorithm, the golden principles that keep agent-generated code coherent, and the clean-code / refactor quality spine.",
 };

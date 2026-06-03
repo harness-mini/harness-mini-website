@@ -7,6 +7,7 @@ import { DOCS_NAV, INSTALL_CMD, REPO_URL, REFERENCES } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Docs",
+  alternates: { canonical: "/docs" },
   description:
     "Documentation for harness-mini — the 40% line, the lifecycle, principles, and architecture.",
 };
