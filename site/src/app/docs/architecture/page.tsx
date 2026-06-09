@@ -11,12 +11,13 @@ export const metadata: Metadata = {
 
 const LAYOUT = `AGENTS.md              # ~100-line map injected every run (table of contents)
 ARCHITECTURE.md        # this file
-VERSION                # canonical version (e.g. 0.3.0)
+VERSION                # canonical version (e.g. 0.7.1)
 init.sh                # additive, idempotent installer (new vs existing)
 bin/
-  harness.sh           # front-door CLI: version · update · release · doctor · status
-  _harness_lib.sh      # shared helpers (managed set, checksums, lockfile)
+  harness.sh           # front-door CLI: version · update · release · report · doctor · status
+  _harness_lib.sh      # shared helpers (managed set, checksums, semver compare)
   ctx.sh               # context % estimate vs the 40% threshold
+  ctx-hook.sh          # opt-in (Claude Code) PostToolUse ctx sampler → checkpoint nudge
   trace.sh             # append runtime JSONL (best-effort, never blocks)
   ralph.sh             # ralph-loop driver (work → check → repeat)
 skills/                # source skills: skills/<name>/SKILL.md → .claude/skills/
@@ -34,11 +35,13 @@ harness/
   harness.lock         # version + pristine checksums of managed files
 .trace/
   checkpoints/         # COMMITTED — decisions, milestones, handoffs
+  evals/               # COMMITTED — eval verdicts (tier · verdict · criteria)
+  garden-backlog.md    # COMMITTED — out-of-scope smells awaiting a sweep
   runtime/             # GITIGNORED — ephemeral per-run JSONL`;
 
 const FSM = `intake → prd → issues → implement ⇄ evaluate → checkpoint → done
                            ↑___________|   (loop until criteria pass)
-       garden ──── runs orthogonally, periodically ────`;
+       garden ──── runs orthogonally, on signals (cadence + backlog) ────`;
 
 export default function ArchitecturePage() {
   return (
@@ -58,10 +61,23 @@ export default function ArchitecturePage() {
       <CodeBlock>{LAYOUT}</CodeBlock>
       <Prose className="mt-2">
         <p>
-          <code>bin/harness.sh</code> is the front door: <code>version</code>,{" "}
-          <code>update</code> (checksum-guarded sync that keeps your edits) and{" "}
-          <code>release</code>, plus <code>doctor</code> (an install health check)
-          and <code>status</code> (current work state for a cold resume).
+          <code>bin/harness.sh</code> is the front door: <code>version</code>{" "}
+          (which also reports whether a newer harness-mini exists), <code>update</code>{" "}
+          (checksum-guarded sync that keeps your edits) and <code>release</code>,
+          plus <code>doctor</code> (an install health check), <code>status</code>{" "}
+          (current work state for a cold resume), and <code>report</code> (a
+          pure-shell aggregator over <code>.trace/</code> — stage advances, the
+          context trend vs the 40% line, eval pass/fail and rework loops,
+          checkpoint count — so the thresholds are tuned by data, not vibes).
+        </p>
+        <p>
+          On a fresh session the <strong>routing gate</strong> and{" "}
+          <code>stage-viewer</code> run <code>harness.sh version</code> first, so
+          the agent checks for a newer release before routing work and offers an{" "}
+          <code>update</code> if one exists — surfaced as a semver verdict from{" "}
+          <code>version</code>, an <code>update:</code> line in <code>status</code>,
+          and a WARN (never a FAIL) from <code>doctor</code>. Best-effort: silent
+          offline.
         </p>
       </Prose>
 
@@ -83,7 +99,12 @@ export default function ArchitecturePage() {
             anti-self-praise firewall, extended across the whole lifecycle.
             Evaluation is <strong>tiered by risk</strong> (L0 self-check · L1
             lightweight reviewer · L2 full Opus); the firewall is the{" "}
-            <em>separate context</em>, not the model.
+            <em>separate context</em>, not the model. The gate has teeth: every
+            evaluation writes a committed verdict to{" "}
+            <code>.trace/evals/&lt;plan&gt;-NNN.md</code>, and{" "}
+            <code>stage-viewer</code> won&apos;t promote a plan to{" "}
+            <code>done</code> without a <code>verdict: pass</code> —{" "}
+            <code>doctor</code> <strong>fails</strong> any that slips through.
           </li>
         </ul>
 
