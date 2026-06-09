@@ -16,10 +16,10 @@ export const SITE_DESCRIPTION =
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.6.0", // x-release-tag
-  date: "2026-06-03", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.6.0", // x-release-url
-  headline: "Routing gate makes the harness preferred by default; parallel-slices fans out the implement stage.",
+  tag: "v0.7.1", // x-release-tag
+  date: "2026-06-09", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.7.1", // x-release-url
+  headline: "harness.sh report turns the loop into data from .trace/; committed eval verdicts give the anti-self-praise firewall teeth.",
 } as const;
 
 /** Short version string, derived from {@link HARNESS_RELEASE}. */
@@ -91,9 +91,9 @@ export const SKILLS: Skill[] = [
   { name: "parallel-slices", stage: "implement", blurb: "The implement stage's write fan-out: once the vertical skeleton passes evaluate, build the independent issues in parallel — one generator each, gated on disjoint file footprints — then a single integration evaluate." },
   { name: "clean-code", stage: "implement", blurb: "The forward quality constraint: intention-revealing names, small functions, no duplication, why-not-what comments." },
   { name: "refactor", stage: "implement", blurb: "The recovery constraint: smell → named refactoring, always under green tests, one move at a time." },
-  { name: "evaluate", stage: "evaluate", blurb: "Grade work against acceptance criteria from a separate context, tiered by risk: L0 self-check · L1 lightweight reviewer (default) · L2 full Opus. The firewall is the separate context, not the model." },
+  { name: "evaluate", stage: "evaluate", blurb: "Grade work against acceptance criteria from a separate context, tiered by risk: L0 self-check · L1 lightweight reviewer (default) · L2 full Opus. The firewall is the separate context, not the model — and it writes a committed verdict to .trace/evals/, so \"done\" is earned, not self-declared." },
   { name: "release", stage: "maintain", blurb: "Cut a versioned release — bump VERSION, roll the CHANGELOG, tag, and publish a GitHub release. Wraps bin/harness.sh release; owns the semver + changelog judgment the script can't." },
-  { name: "garden", stage: "maintain", blurb: "Entropy GC: scan for drift — stale docs, dead context, smells — and open small targeted fixes." },
+  { name: "garden", stage: "maintain", blurb: "Entropy GC: scan for drift — stale docs, dead context, smells — and open small targeted fixes. Fires on concrete signals — a checkpoint cadence (≥5 since the last sweep) and a committed smell backlog — not a vague \"periodically.\"" },
 ];
 
 export type Agent = {
