@@ -16,9 +16,9 @@ export const SITE_DESCRIPTION =
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.7.1", // x-release-tag
-  date: "2026-06-09", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.7.1", // x-release-url
+  tag: "v0.8.0", // x-release-tag
+  date: "2026-06-12", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.8.0", // x-release-url
   headline: "harness.sh report turns the loop into data from .trace/; committed eval verdicts give the anti-self-praise firewall teeth.",
 } as const;
 
