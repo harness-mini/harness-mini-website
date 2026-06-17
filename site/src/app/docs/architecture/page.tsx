@@ -20,11 +20,13 @@ bin/
   ctx-hook.sh          # opt-in (Claude Code) PostToolUse ctx sampler → checkpoint nudge
   trace.sh             # append runtime JSONL (best-effort, never blocks)
   ralph.sh             # ralph-loop driver (work → check → repeat)
+  model.sh             # resolve each sub-agent's model tier (builder upgrades to the top tier)
 skills/                # source skills: skills/<name>/SKILL.md → .claude/skills/
 agents/                # source sub-agents: <name>.md → .claude/agents/
 docs/
   principles.md        # golden principles + Five-Step core-mind
   smart-dumb.md        # the 40% occupancy contract
+  assumptions.md       # load-bearing assumptions as hypotheses-with-a-test
   exec-plans/
     active/            # in-flight plans + decision logs (committed)
     completed/         # archived plans (committed)

@@ -133,7 +133,44 @@ export default function PrinciplesPage() {
             Agent-written code need not match human style; it must be right and
             clear for the next run.
           </li>
+          <li>
+            <strong>Spend emphasis from a budget.</strong> Emphasis is signal only
+            when it&apos;s rare. Reserve <strong>ALL-CAPS</strong> for a small set of
+            load-bearing imperatives — <code>MUST</code> / <code>NEVER</code> /{" "}
+            <code>ALWAYS</code> — on safety- or invariant-critical lines; default to
+            bold + structure everywhere else. If every line shouts, nothing does.
+          </li>
         </ol>
+
+        <h2>Question stale assumptions (the harness is not the model)</h2>
+        <p>
+          Almost every mechanism here is a{" "}
+          <strong>patch for a presumed model gap</strong> — the 40% line, the
+          anti-self-praise eval firewall, the explorer fan-out, progressive
+          disclosure, even caps-for-emphasis (#9). Each was true when written; each
+          may quietly stop being true as models improve. So harness-mini holds them
+          as <strong>hypotheses, not law</strong>.
+        </p>
+        <ul>
+          <li>
+            <strong>Register the assumption.</strong> Every load-bearing constraint
+            is logged in <code>docs/assumptions.md</code> with the model-gap it
+            patches and a concrete <em>test if stale</em> — an experiment read off{" "}
+            <code>harness.sh report</code>.
+          </li>
+          <li>
+            <strong>Re-test on a trigger, don&apos;t trust forever.</strong> The{" "}
+            <code>garden</code> sweep audits the register pre-release and whenever
+            the builder model tier moves. A constraint that no longer earns its keep
+            is <strong>deleted</strong> — Five-Step step 2 applied to the
+            harness&apos;s own beliefs, not just its features.
+          </li>
+        </ul>
+        <p>
+          Distilled from Anthropic&apos;s <em>Scaling managed agents</em>: a harness
+          encodes assumptions about what the model can&apos;t do on its own, and
+          those assumptions go stale as models improve.
+        </p>
 
         <h2>Clean Code &amp; Refactoring (the quality spine)</h2>
         <ul>
