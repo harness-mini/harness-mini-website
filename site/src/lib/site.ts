@@ -16,10 +16,10 @@ export const SITE_DESCRIPTION =
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.8.0", // x-release-tag
-  date: "2026-06-12", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.8.0", // x-release-url
-  headline: "bin/model.sh resolves each sub-agent's model tier — the builder auto-upgrades to the highest available frontier tier; a new assumption register holds every harness mechanism as a hypothesis the garden sweep re-tests.",
+  tag: "v0.9.0", // x-release-tag
+  date: "2026-06-24", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.9.0", // x-release-url
+  headline: "We built CIB — a context-intelligence benchmark — and ran it live (gpt-4o-mini · haiku-4.5 · Qwen2.5-7B) to put the 40% line to the test. Under a controlled design, raw occupancy showed no 40% “intelligence cliff” — even on the paper's own model; what degrades quality is interference (competing content), not how full the window is. So 40% now stands as a conservative checkpoint default, not a law.",
 } as const;
 
 /** Short version string, derived from {@link HARNESS_RELEASE}. */

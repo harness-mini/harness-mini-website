@@ -34,6 +34,12 @@ export function Prose({
         "[&_code]:rounded [&_code]:border [&_code]:border-border [&_code]:bg-muted/60 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.85em] [&_code]:text-foreground",
         // blockquote
         "[&_blockquote]:mt-6 [&_blockquote]:border-l-2 [&_blockquote]:border-primary/50 [&_blockquote]:pl-4 [&_blockquote]:text-foreground/90 [&_blockquote]:italic",
+        // tables (wrap a <table> in <div className="table-wrap"> for the scroll frame)
+        "[&_.table-wrap]:mt-6 [&_.table-wrap]:overflow-x-auto [&_.table-wrap]:rounded-lg [&_.table-wrap]:border [&_.table-wrap]:border-border",
+        "[&_table]:w-full [&_table]:border-collapse [&_table]:text-left [&_table]:text-[0.85rem]",
+        "[&_thead]:bg-muted/40 [&_th]:px-3 [&_th]:py-2 [&_th]:font-semibold [&_th]:text-foreground [&_th]:whitespace-nowrap",
+        "[&_td]:border-t [&_td]:border-border [&_td]:px-3 [&_td]:py-2 [&_td]:align-top",
+        "[&_td>code]:whitespace-nowrap",
         // hr
         "[&_hr]:my-10 [&_hr]:border-border",
         className,

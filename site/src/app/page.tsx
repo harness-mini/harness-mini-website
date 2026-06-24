@@ -225,12 +225,17 @@ export default function Home() {
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
               Context occupancy below <strong className="text-foreground">40%</strong>{" "}
-              is the <span className="text-primary">smart zone</span> — the model
-              reasons sharply and holds the whole task in view. At or above 40% is
-              the <span className="text-amber">dumb zone</span>: it drops
-              instructions, optimizes the wrong constraint, and writes worse
-              handoffs. Quality falls long before the nominal context limit, so the
-              line is drawn early.
+              is the <span className="text-primary">smart zone</span> — comfortable
+              headroom to reason and hold the whole task in view. 40% is a{" "}
+              <span className="text-amber">conservative checkpoint line</span>, not a
+              hard cliff: our own{" "}
+              <Link href="/docs/the-40-line" className="text-foreground underline decoration-primary/40 underline-offset-4 hover:decoration-primary">
+                CIB benchmark
+              </Link>{" "}
+              found that what degrades quality is{" "}
+              <strong className="text-foreground">interference</strong> — competing
+              content in the window — not how full it is. So the mechanisms below
+              earn their keep by keeping that content out.
             </p>
           </div>
 
@@ -515,7 +520,7 @@ function FortyMeter() {
     <div className="mt-10 rounded-xl border border-border bg-card/40 p-6">
       <div className="flex items-end justify-between font-mono text-xs">
         <span className="text-primary">smart zone · &lt; 40%</span>
-        <span className="text-amber">dumb zone · ≥ 40%</span>
+        <span className="text-amber">checkpoint · ≥ 40%</span>
       </div>
       <div className="relative mt-3 h-8 overflow-hidden rounded-md border border-border">
         <div className="absolute inset-y-0 left-0 w-[40%] bg-gradient-to-r from-primary/30 to-primary/15" />
