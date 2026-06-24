@@ -31,6 +31,7 @@ docs/
     active/            # in-flight plans + decision logs (committed)
     completed/         # archived plans (committed)
   references/          # *-llms.txt distillates of the source blogs
+bench/cib/             # context-intelligence benchmark — the live test of the 40% line
 tests/run.sh           # zero-dep TDD suite for bin/* and init.sh
 harness/
   manifest.md          # neutral pointer list for non-Claude CLIs
