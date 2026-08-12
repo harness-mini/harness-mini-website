@@ -74,6 +74,18 @@ export default function ArchitecturePage() {
           checkpoint count — so the thresholds are tuned by data, not vibes).
         </p>
         <p>
+          <code>status</code> ends with a single{" "}
+          <code>ready: &lt;ready|warning|blocked&gt; — &lt;next&gt;</code> verdict
+          (OpenHarness dry-run idea, Mini-shaped) so a cold session doesn&apos;t
+          re-derive &quot;what next&quot; from raw facts.{" "}
+          <strong>blocked</strong> only for an install-broken tree or an active{" "}
+          <code>done</code> plan without <code>verdict: pass</code>;{" "}
+          <strong>warnings</strong> cover no plan, garden DUE,{" "}
+          <code>.new</code> conflicts, behind-latest, and partial resume. Resumable
+          is <strong>plan-scoped</strong> — foreign checkpoints no longer lie.
+          Assumption <strong>A6</strong> in <code>docs/assumptions.md</code>.
+        </p>
+        <p>
           On a fresh session the <strong>routing gate</strong> and{" "}
           <code>stage-viewer</code> run <code>harness.sh version</code> first, so
           the agent checks for a newer release before routing work and offers an{" "}
@@ -108,6 +120,14 @@ export default function ArchitecturePage() {
             <code>stage-viewer</code> won&apos;t promote a plan to{" "}
             <code>done</code> without a <code>verdict: pass</code> —{" "}
             <code>doctor</code> <strong>fails</strong> any that slips through.
+          </li>
+          <li>
+            <strong>Plan-stage write ban</strong> (convention only — no permission
+            engine): while <code>stage</code> is <code>intake</code> /{" "}
+            <code>prd</code> / <code>issues</code>, do not edit product code.
+            Documented in <code>stage-viewer</code> + the planner; assumption{" "}
+            <strong>A7</strong>. The walking skeleton starts at{" "}
+            <code>implement</code>.
           </li>
         </ul>
 

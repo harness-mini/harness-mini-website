@@ -147,9 +147,11 @@ export default function PrinciplesPage() {
           Almost every mechanism here is a{" "}
           <strong>patch for a presumed model gap</strong> — the 40% line, the
           anti-self-praise eval firewall, the explorer fan-out, progressive
-          disclosure, even caps-for-emphasis (#9). Each was true when written; each
-          may quietly stop being true as models improve. So harness-mini holds them
-          as <strong>hypotheses, not law</strong>.
+          disclosure, caps-for-emphasis (#9), the <code>status</code>{" "}
+          <code>ready:</code> verdict (A6), and the plan-stage write ban (A7).
+          Each was true when written; each may quietly stop being true as models
+          improve. So harness-mini holds them as{" "}
+          <strong>hypotheses, not law</strong>.
         </p>
         <ul>
           <li>
