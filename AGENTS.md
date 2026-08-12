@@ -78,3 +78,19 @@ intake → prd → issues → implement ⇄ evaluate → checkpoint → done
 Log events with `bin/trace.sh <agent> <stage> <event> [k=v ...]` → appends JSONL
 to `.trace/runtime/`. Include `ctx_pct=<n>` so the 40% line is observable.
 Commit milestones as checkpoints in `.trace/checkpoints/` (the `checkpoint` skill).
+
+## Cursor Cloud specific instructions
+
+The deployable product is the Next.js 16 website in `site/`. The framework at the
+repo root (`bin/`, `.claude/`, `docs/`) is plain shell + markdown with no runtime
+deps — nothing to build there.
+
+- All app commands run from `site/` (see `site/README.md`): `npm run dev`
+ (http://localhost:3000), `npm run lint`, `npm run build`, `npm start`.
+- Node 22 is required (matches `.github/workflows/ci.yml`). The startup update
+ script already runs `npm ci` in `site/`, so deps are ready.
+- `npm run dev` uses Turbopack and binds `localhost:3000`; routes are all
+ statically prerenderable, so `curl http://localhost:3000/` is a quick smoke test.
+- No env vars or external services are needed to run or build the site locally.
+- Next.js 16 has breaking changes vs. older versions; consult
+ `site/node_modules/next/dist/docs/` before editing app code (see `site/AGENTS.md`).
