@@ -1,6 +1,9 @@
 # harness-mini: ephemeral runtime traces (checkpoints/ ARE committed)
 .trace/runtime/
 
+# local coding-agent host tooling (kept on disk, not committed)
+.claude/
+
 # dependencies & build output (also covered by site/.gitignore)
 node_modules/
 .next/

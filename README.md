@@ -28,7 +28,7 @@ route is statically prerendered.
 ├─ docs/exec-plans/    # committed PRDs / decision logs (active + completed)
 ├─ .trace/checkpoints/ # committed handoffs (institutional memory)
 ├─ bin/                # ctx · trace · ralph shell tools
-├─ .claude/            # skills + sub-agents (auto-loaded by Claude Code)
+├─ .claude/            # local coding-agent layout (gitignored)
 └─ site/               # ← the website (the deployed product)
    └─ src/
       ├─ app/          # routes: landing + /docs + opengraph-image
