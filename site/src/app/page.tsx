@@ -424,7 +424,7 @@ export default function Home() {
       <section id="install" className="scroll-mt-20 py-20">
         <Container>
           <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
-            <div>
+            <div className="min-w-0">
               <Eyebrow>
                 <FileTerminal className="size-3.5 text-primary" />
                 install
@@ -474,7 +474,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="lg:sticky lg:top-24">
+            <div className="min-w-0 lg:sticky lg:top-24">
               <Terminal command={INSTALL_CMD} label="bash" />
               <p className="mt-4 text-sm text-muted-foreground">
                 Skills install to{" "}
