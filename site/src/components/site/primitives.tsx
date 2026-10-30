@@ -36,9 +36,9 @@ export function Eyebrow({
 }
 
 const MODEL_STYLES: Record<Agent["model"], string> = {
-  opus: "border-amber/40 bg-amber/10 text-amber",
-  sonnet: "border-primary/40 bg-primary/10 text-primary",
-  haiku: "border-chart-3/40 bg-chart-3/10 text-chart-3",
+  full: "border-amber/40 bg-amber/10 text-amber",
+  mid: "border-primary/40 bg-primary/10 text-primary",
+  light: "border-chart-3/40 bg-chart-3/10 text-chart-3",
 };
 
 export function ModelBadge({ model }: { model: Agent["model"] }) {

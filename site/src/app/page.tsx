@@ -332,10 +332,12 @@ export default function Home() {
               {SKILLS.length} skills, by stage
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Skills install to{" "}
+              Skills use the common coding-agent layout{" "}
               <code className="font-mono text-sm">.claude/skills/</code> and encode{" "}
               <em>how</em> to do a task — invoked at the right point in the
-              lifecycle.
+              lifecycle. See{" "}
+              <code className="font-mono text-sm">harness/manifest.md</code> for
+              agent-neutral pointers.
             </p>
           </div>
 
@@ -477,11 +479,10 @@ export default function Home() {
             <div className="min-w-0 lg:sticky lg:top-24">
               <Terminal command={INSTALL_CMD} label="bash" />
               <p className="mt-4 text-sm text-muted-foreground">
-                Skills install to{" "}
-                <code className="font-mono text-xs">.claude/skills/</code> and
-                agents to <code className="font-mono text-xs">.claude/agents/</code>{" "}
-                (auto-loaded by Claude Code);{" "}
-                <code className="font-mono text-xs">harness/manifest.md</code> is a
+                Skills and agents land in the conventional install dirs{" "}
+                <code className="font-mono text-xs">.claude/skills/</code> and{" "}
+                <code className="font-mono text-xs">.claude/agents/</code>;{" "}
+                <code className="font-mono text-xs">harness/manifest.md</code> is the
                 neutral pointer list for other CLIs.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">

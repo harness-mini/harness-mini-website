@@ -99,16 +99,16 @@ export const SKILLS: Skill[] = [
 export type Agent = {
   name: string;
   role: string;
-  model: "sonnet" | "opus" | "haiku";
+  model: "light" | "mid" | "full";
   blurb: string;
 };
 
 export const AGENTS: Agent[] = [
-  { name: "planner", role: "goal → exec-plan + issues", model: "sonnet", blurb: "Expands a goal into a committed PRD and atomic issues. Runs the founder funnel on new projects. Writes no production code." },
-  { name: "generator", role: "build one slice via TDD", model: "sonnet", blurb: "Implements one issue at a time, test-first, under the layering contract. Hands the slice to the evaluator — never grades its own work." },
-  { name: "evaluator", role: "grade vs criteria", model: "opus", blurb: "Grades work from a separate context window — the firewall. Evaluation scales with risk (L0/L1/L2); the L2 Opus pass is reserved for high-stakes work. Verifies by running tests/app; returns pass/fail with evidence." },
-  { name: "explorer", role: "disposable read/search → distillate", model: "haiku", blurb: "Read-only fan-out. Burns its own context on heavy searches, returns a short distillate, and dies. The context firewall." },
-  { name: "gardener", role: "entropy GC / doc-gardening", model: "haiku", blurb: "Periodically scans for drift and opens small, green, one-move fixes. Keeps the repo coherent and the smart zone smart." },
+  { name: "planner", role: "goal → exec-plan + issues", model: "mid", blurb: "Expands a goal into a committed PRD and atomic issues. Runs the founder funnel on new projects. Writes no production code." },
+  { name: "generator", role: "build one slice via TDD", model: "mid", blurb: "Implements one issue at a time, test-first, under the layering contract. Hands the slice to the evaluator — never grades its own work." },
+  { name: "evaluator", role: "grade vs criteria", model: "full", blurb: "Grades work from a separate context window — the firewall. Evaluation scales with risk (L0/L1/L2); the L2 Opus pass is reserved for high-stakes work. Verifies by running tests/app; returns pass/fail with evidence." },
+  { name: "explorer", role: "disposable read/search → distillate", model: "light", blurb: "Read-only fan-out. Burns its own context on heavy searches, returns a short distillate, and dies. The context firewall." },
+  { name: "gardener", role: "entropy GC / doc-gardening", model: "light", blurb: "Periodically scans for drift and opens small, green, one-move fixes. Keeps the repo coherent and the smart zone smart." },
 ];
 
 export const REFERENCES = [

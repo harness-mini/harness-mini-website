@@ -29,8 +29,8 @@ export const metadata: Metadata = {
   keywords: [
     "agent harness",
     "LLM agents",
-    "Claude Code",
-    "Codex",
+    "coding agents",
+    "agent-agnostic",
     "long-running agents",
     "context engineering",
     "harness-mini",
