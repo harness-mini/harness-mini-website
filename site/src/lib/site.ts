@@ -16,9 +16,9 @@ export const SITE_DESCRIPTION =
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.10.0", // x-release-tag
-  date: "2026-08-11", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.10.0", // x-release-url
+  tag: "v0.11.0", // x-release-tag
+  date: "2026-10-30", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.11.0", // x-release-url
   headline: "Session ops for cold resume: `harness.sh status` now ends with a single `ready: <ready|warning|blocked> — <next>` verdict (plan-scoped, so foreign checkpoints no longer lie). Checkpoint gains an additive `## Task state` block; stage-viewer documents a plan-stage write ban for intake/prd/issues. Assumptions A6/A7 registered.",
 } as const;
 
