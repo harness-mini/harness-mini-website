@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { SKILLS, AGENTS } from "@/lib/site";
 
 export const alt =
-  "harness-mini — Coding for developers · agent-agnostic · files + shell";
+  "harness-mini — a minimal outer harness for long coding tasks · files + shell";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -53,8 +53,8 @@ export default function OpengraphImage() {
               letterSpacing: -1.5,
             }}
           >
-            <span style={{ display: "flex" }}>A minimal coding harness</span>
-            <span style={{ display: "flex", color: green }}>for developers.</span>
+            <span style={{ display: "flex" }}>A minimal outer harness</span>
+            <span style={{ display: "flex", color: green }}>for long coding tasks.</span>
           </div>
 
           <div

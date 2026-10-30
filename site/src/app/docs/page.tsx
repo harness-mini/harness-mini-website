@@ -22,8 +22,8 @@ const CARDS = [
   {
     href: "/docs/principles",
     icon: FileTerminal,
-    title: "Principles & core-mind",
-    body: "Musk's Five-Step Algorithm, the golden principles, and the clean-code / refactor quality spine.",
+    title: "Principles",
+    body: "The Mini delete-first constraint, the golden principles, and the clean-code / refactor quality spine.",
   },
   {
     href: "/docs/architecture",
@@ -43,19 +43,16 @@ export default function DocsOverview() {
 
       <Prose className="mt-6">
         <p>
-          <strong>harness-mini</strong> is a minimal, CLI-agnostic agent harness:
-          convention + skills + sub-agents + distilled best-practice docs, with
-          only thin shell glue as code. It encodes the patterns from Anthropic&apos;s
-          long-running-agent engineering, OpenAI&apos;s harness engineering, and
-          Anthropic&apos;s Founder&apos;s Playbook into a structure you can drop into any
-          project.
+          <strong>harness-mini</strong> is a minimal outer harness for
+          developers&apos; long coding tasks: repo conventions + skills +
+          sub-agents + distilled docs, with only thin shell glue as code. It
+          keeps work on-task, context-light, and resumable across sessions.
         </p>
         <p>
-          The harness <em>is the environment</em>, not a program. Any agent that
-          can run a shell — <code>claude</code>, <code>codex</code>,{" "}
-          <code>cursor</code> — can use it. The repository is the system of
-          record: anything not in a version-controlled file does not exist to the
-          agent.
+          The contract is <strong>files + shell</strong>. Any coding agent that
+          can read the repo and run commands can drive it — no vendor-specific
+          runtime. The repository is the system of record: anything not in a
+          version-controlled file does not exist to the agent.
         </p>
       </Prose>
 

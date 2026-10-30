@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "harness-mini — coding for developers",
+    default: "harness-mini — a minimal outer harness for long coding tasks",
     template: "%s · harness-mini",
   },
   description: SITE_DESCRIPTION,
@@ -41,8 +41,8 @@ export const metadata: Metadata = {
   // Default canonical for the landing page; each docs page overrides its own.
   alternates: { canonical: "/" },
   openGraph: {
-    title: "harness-mini — coding for developers",
-    description: "Coding for developers · agent-agnostic · files + shell",
+    title: "harness-mini — a minimal outer harness for long coding tasks",
+    description: "On-task, context-light, resumable · files + shell",
     url: SITE_URL,
     siteName: "harness-mini",
     type: "website",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "harness-mini",
-    description: "Coding for developers · agent-agnostic · files + shell",
+    description: "On-task, context-light, resumable · files + shell",
   },
 };
 

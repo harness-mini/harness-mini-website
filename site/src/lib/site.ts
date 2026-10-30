@@ -6,7 +6,7 @@ export const ONE_LINER_INSTALL = 'tell your agent: "install harness-mini here"';
 
 /** Canonical one-paragraph description — single source for metadata + JSON-LD. */
 export const SITE_DESCRIPTION =
-  "Outer harness for long coding tasks — conventions + skills + sub-agents + thin shell glue. Drop into a repo; keep a coding agent on-task across sessions. The harness is the environment, not a program.";
+  "A minimal outer harness for developers' long coding tasks — repo conventions + skills + sub-agents + thin shell glue. Keep a coding agent on-task, context-light, and resumable across sessions. The contract is files + shell.";
 
 /**
  * The harness-mini release this site documents.
@@ -19,7 +19,7 @@ export const HARNESS_RELEASE = {
   tag: "v0.11.0", // x-release-tag
   date: "2026-10-30", // x-release-date
   url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.11.0", // x-release-url
-  headline: "Session ops for cold resume: `harness.sh status` now ends with a single `ready: <ready|warning|blocked> — <next>` verdict (plan-scoped, so foreign checkpoints no longer lie). Checkpoint gains an additive `## Task state` block; stage-viewer documents a plan-stage write ban for intake/prd/issues. Assumptions A6/A7 registered.",
+  headline: "Five-Step retires as a skill, core-mind, and mandatory intake gate. The harness keeps a plain delete-first discipline under the Mini constraint, and the founder funnel is now founder-check → to-prd → to-issues.",
 } as const;
 
 /** Short version string, derived from {@link HARNESS_RELEASE}. */
@@ -39,7 +39,7 @@ export const NAV = [
 export const DOCS_NAV = [
   { href: "/docs", label: "Overview" },
   { href: "/docs/the-40-line", label: "The 40% line" },
-  { href: "/docs/principles", label: "Principles & core-mind" },
+  { href: "/docs/principles", label: "Principles" },
   { href: "/docs/architecture", label: "Architecture" },
 ] as const;
 
@@ -81,7 +81,6 @@ export const SKILLS: Skill[] = [
   { name: "stage-viewer", stage: "orchestrate", blurb: "The single authority that moves a plan through the FSM. Main-agent only — no sub-agent self-promotes. Documents a plan-stage write ban (convention only) for intake/prd/issues — no product-code edits until the walking skeleton is authorized." },
   { name: "ralph-loop", stage: "orchestrate", blurb: "Drive a long-running work → check → repeat loop until criteria pass or a human-judgment flag is raised." },
   { name: "checkpoint", stage: "orchestrate", blurb: "Write a committed handoff so a fresh session resumes with zero loss — while the agent is still sharp. Includes an additive ## Task state block (acceptance / footprint / last green / open issues) so cold resume is plan-scoped and honest." },
-  { name: "five-step", stage: "orchestrate", blurb: "Apply Musk's algorithm — question, delete, simplify, accelerate, automate — in that order, before building." },
   { name: "grill-me", stage: "orchestrate", blurb: "Interview the user relentlessly about a plan until every branch of the decision tree is resolved." },
   { name: "founder-check", stage: "intake", blurb: "Greenfield-only gate: who is the user, the smallest valuable slice, the riskiest assumption, the BML loop." },
   { name: "to-prd", stage: "plan", blurb: "Turn a raw idea into an executable PRD — a versioned, agent-readable, testable source of truth." },
@@ -114,6 +113,7 @@ export const AGENTS: Agent[] = [
 export const REFERENCES = [
   "Anthropic — Effective harnesses for long-running agents",
   "Anthropic — Harness design for long-running apps",
+  "Anthropic — Scaling managed agents (decoupling brain/hands/session; stale assumptions)",
   "OpenAI — Harness engineering (leveraging Codex)",
   "Anthropic — The Founder's Playbook",
 ];
