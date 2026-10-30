@@ -95,7 +95,7 @@ export function SiteFooter() {
           <p className="font-mono">
             convention + skills + sub-agents + thin shell glue
           </p>
-          <p>Distilled from Anthropic & OpenAI harness engineering.</p>
+          <p>Distilled from industry harness-engineering sources.</p>
         </div>
       </div>
     </footer>
