@@ -18,8 +18,8 @@ export function SiteFooter() {
             harness-mini
           </div>
           <p className="max-w-xs text-sm text-muted-foreground">
-            Coding for developers · agent-agnostic · files + shell. The harness
-            is the environment, not a program.
+            Long coding tasks · files + shell. On-task, context-light, and
+            resumable — the harness is the environment, not a program.
           </p>
           <p className="font-mono text-xs text-muted-foreground/80">
             documenting{" "}

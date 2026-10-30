@@ -3,10 +3,10 @@ import { Prose } from "@/components/site/prose";
 import { DocFooterNav } from "@/components/site/doc-footer-nav";
 
 export const metadata: Metadata = {
-  title: "Principles & core-mind",
+  title: "Principles",
   alternates: { canonical: "/docs/principles" },
   description:
-    "The Mini constraint, Musk's Five-Step Algorithm, the golden principles that keep agent-generated code coherent, and the clean-code / refactor quality spine.",
+    "The Mini constraint, the delete-first discipline, the golden principles that keep agent-generated code coherent, and the clean-code / refactor quality spine.",
 };
 
 export default function PrinciplesPage() {
@@ -16,7 +16,7 @@ export default function PrinciplesPage() {
         Taste, encoded once
       </p>
       <h1 className="mt-2 text-4xl font-semibold tracking-tight">
-        Principles &amp; core-mind
+        Principles
       </h1>
 
       <Prose className="mt-6">
@@ -50,45 +50,11 @@ export default function PrinciplesPage() {
             this?” is no — subtract until what remains is load-bearing.
           </li>
         </ul>
-
-        <h2>Core-mind: Musk&apos;s Five-Step Algorithm</h2>
         <p>
-          Apply <strong>in order</strong> before building anything. The order
-          matters more than any single step.
+          That is the whole method: question the requirement, then try to delete
+          it before adding code. The harness keeps that discipline plain — no
+          named algorithm and no mandatory intake gate.
         </p>
-        <ol>
-          <li>
-            <strong>Make the requirement less dumb.</strong> Question every
-            requirement. Attach a <em>person&apos;s name</em> to it, never a department
-            — requirements from “the system” are guesses in disguise. The smartest
-            people&apos;s requirements are still partly wrong.
-          </li>
-          <li>
-            <strong>Delete the part or process.</strong> If you are not later forced
-            to add back at least 10% of what you deleted, you did not delete enough.
-            The best part is no part; the best process is no process.
-          </li>
-          <li>
-            <strong>Simplify or optimize — only what survived step 2.</strong> The
-            most common error of a smart engineer is to optimize a thing that should
-            not exist.
-          </li>
-          <li>
-            <strong>Accelerate cycle time.</strong> Speed up — but never before
-            steps 1–3. Never accelerate a process that should be deleted.
-          </li>
-          <li>
-            <strong>Automate — last.</strong> Automating a flawed or unnecessary
-            process locks the flaw in. Automate only what has survived all four
-            prior steps.
-          </li>
-        </ol>
-        <blockquote>
-          The two named failure modes this prevents: <strong>optimizing</strong> and{" "}
-          <strong>automating</strong> something that should have been deleted. In an
-          agent harness these are the expensive mistakes — they get encoded and
-          replicated across every future run.
-        </blockquote>
 
         <h2>Golden principles (mechanical, enforce-able)</h2>
         <ol>
@@ -164,8 +130,9 @@ export default function PrinciplesPage() {
             <strong>Re-test on a trigger, don&apos;t trust forever.</strong> The{" "}
             <code>garden</code> sweep audits the register pre-release and whenever
             the builder model tier moves. A constraint that no longer earns its keep
-            is <strong>deleted</strong> — Five-Step step 2 applied to the
-            harness&apos;s own beliefs, not just its features.
+            is <strong>deleted</strong> — the Mini constraint&apos;s delete-first
+            discipline applied to the harness&apos;s own beliefs, not just its
+            features.
           </li>
         </ul>
         <p>

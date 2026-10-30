@@ -17,14 +17,14 @@ bin/
   harness.sh           # front-door CLI: version · update · release · report · doctor · status
   _harness_lib.sh      # shared helpers (managed set, checksums, semver compare)
   ctx.sh               # context % estimate vs the 40% threshold
-  ctx-hook.sh          # opt-in (Claude Code) PostToolUse ctx sampler → checkpoint nudge
+  ctx-hook.sh          # opt-in host PostToolUse ctx sampler → checkpoint nudge
   trace.sh             # append runtime JSONL (best-effort, never blocks)
   ralph.sh             # ralph-loop driver (work → check → repeat)
   model.sh             # resolve each sub-agent's model tier (builder upgrades to the top tier)
 skills/                # source skills: skills/<name>/SKILL.md → .claude/skills/
 agents/                # source sub-agents: <name>.md → .claude/agents/
 docs/
-  principles.md        # golden principles + Five-Step core-mind
+  principles.md        # golden principles + the Mini delete-first constraint
   smart-dumb.md        # the 40% occupancy contract
   assumptions.md       # load-bearing assumptions as hypotheses-with-a-test
   exec-plans/
@@ -34,7 +34,7 @@ docs/
 bench/cib/             # context-intelligence benchmark — the live test of the 40% line
 tests/run.sh           # zero-dep TDD suite for bin/* and init.sh
 harness/
-  manifest.md          # neutral pointer list for non-Claude CLIs
+  manifest.md          # neutral pointer list for other CLIs
   harness.lock         # version + pristine checksums of managed files
 .trace/
   checkpoints/         # COMMITTED — decisions, milestones, handoffs
@@ -166,7 +166,7 @@ export default function ArchitecturePage() {
           <li>
             <strong>new</strong> → generative bootstrap: seed{" "}
             <code>0001-intake.md</code>, run the founder funnel (founder-check →
-            five-step → to-prd → to-issues).
+            to-prd → to-issues).
           </li>
           <li>
             <strong>existing</strong> → recon graft: seed <code>0001-recon.md</code>,
@@ -186,7 +186,7 @@ export default function ArchitecturePage() {
       </Prose>
 
       <DocFooterNav
-        prev={{ href: "/docs/principles", label: "Principles & core-mind" }}
+        prev={{ href: "/docs/principles", label: "Principles" }}
         next={{ href: "/docs", label: "Back to overview" }}
       />
     </>

@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Live](https://img.shields.io/badge/live-harness--mini--website.vercel.app-000?logo=vercel)](https://harness-mini-website.vercel.app)
 
-The marketing + docs website for **[harness-mini](https://github.com/harness-mini/harness-mini)** — a minimal, CLI-agnostic agent harness.
+The marketing + docs website for **[harness-mini](https://github.com/harness-mini/harness-mini)** — a minimal outer harness for developers' long coding tasks.
 
 **Live:** https://harness-mini-website.vercel.app
 

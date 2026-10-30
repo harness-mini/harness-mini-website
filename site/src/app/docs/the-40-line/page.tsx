@@ -241,10 +241,11 @@ export default function FortyLinePage() {
         <p>
           <code>bin/ctx.sh &lt;used_tokens&gt; [window]</code> prints{" "}
           <code>N%</code> and exits 2 at/over threshold. You cannot portably read a
-          model&apos;s internal token counter, so this is an estimate. On Claude
-          Code the opt-in <code>bin/ctx-hook.sh</code> PostToolUse adapter does
-          better — it records a <code>ctx_pct</code> sample after each tool call
-          and nudges you to checkpoint once you cross the line.{" "}
+          model&apos;s internal token counter, so this is an estimate. On hosts
+          that support a PostToolUse hook, the opt-in{" "}
+          <code>bin/ctx-hook.sh</code> adapter does better — it records a{" "}
+          <code>ctx_pct</code> sample after each tool call and nudges you to
+          checkpoint once you cross the line.{" "}
           <code>harness.sh report</code> then aggregates those samples into a
           context trend (sample count, max %, crossings) — enough to watch drift
           in <code>.trace/</code>, not a hard interrupt.
@@ -266,9 +267,9 @@ export default function FortyLinePage() {
         <h2>Enforcement style</h2>
         <p>
           <strong>Behavioral + structural</strong>, not a hard runtime kill: agents
-          follow this protocol and the explorer firewall does the heavy lifting. On
-          Claude Code, the opt-in <code>ctx-hook.sh</code> adds a real-usage
-          tripwire on top.
+          follow this protocol and the explorer firewall does the heavy lifting.
+          On hosts that support a PostToolUse hook, the opt-in{" "}
+          <code>ctx-hook.sh</code> adds a real-usage tripwire on top.
         </p>
 
         <h2>Entropy: smart context decays</h2>
@@ -283,7 +284,7 @@ export default function FortyLinePage() {
 
       <DocFooterNav
         prev={{ href: "/docs", label: "Overview" }}
-        next={{ href: "/docs/principles", label: "Principles & core-mind" }}
+        next={{ href: "/docs/principles", label: "Principles" }}
       />
     </>
   );

@@ -1,7 +1,7 @@
 # harness-mini website
 
 Marketing + docs site for [harness-mini](https://github.com/harness-mini/harness-mini)
-— a minimal, CLI-agnostic agent harness.
+— a minimal outer harness for developers' long coding tasks.
 
 Built with **Next.js 16** (App Router), **Tailwind CSS v4**, and **shadcn/ui**
 (Base UI primitives). Dark, terminal/developer aesthetic.
@@ -27,7 +27,7 @@ src/
       layout.tsx          # docs shell (sticky sidebar + content)
       page.tsx            # docs overview
       the-40-line/        # the smart/dumb contract
-      principles/         # Five-Step + golden principles
+      principles/         # delete-first + golden principles
       architecture/       # layout, FSM, layering contract
   components/
     site/                 # header, footer, terminal, prose, primitives, icons

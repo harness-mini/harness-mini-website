@@ -92,7 +92,7 @@ export default function Home() {
           <div className="mx-auto max-w-3xl text-center">
             <Eyebrow>
               <span className="text-primary">❯</span>
-              Coding for developers · agent-agnostic ·{" "}
+              Long coding tasks · files + shell ·{" "}
               <a
                 href={HARNESS_RELEASE.url}
                 target="_blank"
@@ -103,13 +103,13 @@ export default function Home() {
               </a>
             </Eyebrow>
             <h1 className="mt-6 text-4xl font-semibold tracking-tight sm:text-6xl">
-              A minimal coding harness
-              <span className="text-primary text-glow"> for developers</span>.
+              A minimal outer harness
+              <span className="text-primary text-glow"> for long coding tasks</span>.
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-              Outer harness for long coding tasks — conventions + skills +
-              sub-agents + thin shell glue. Drop into a repo; keep a coding agent
-              on-task across sessions.
+              Repo conventions + skills + sub-agents + thin shell glue keep a
+              coding agent on-task, context-light, and resumable across sessions.
+              Drop into a repo; any shell-capable agent can drive it.
             </p>
             <p className="mx-auto mt-3 max-w-xl font-mono text-sm text-muted-foreground/80">
               The harness is the environment, not a program.
@@ -455,7 +455,7 @@ export default function Home() {
                     Generative bootstrap — seeds an intake plan and runs the
                     founder funnel:{" "}
                     <code className="font-mono text-xs">
-                      founder-check → five-step → to-prd → to-issues
+                      founder-check → to-prd → to-issues
                     </code>
                     .
                   </p>
