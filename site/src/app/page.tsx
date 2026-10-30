@@ -53,8 +53,8 @@ const FEATURES = [
   },
   {
     icon: GitBranch,
-    title: "CLI-agnostic",
-    body: "Skills and agents install to .claude/ for Claude Code; a neutral manifest points other CLIs — codex, cursor — at the same files. One harness, any agent.",
+    title: "Works with shell-capable coding agents",
+    body: "The harness is Markdown + thin shell. Point any coding agent that can read the repo and run commands at the same files — no vendor lock-in in the contract.",
   },
 ];
 
@@ -92,7 +92,7 @@ export default function Home() {
           <div className="mx-auto max-w-3xl text-center">
             <Eyebrow>
               <span className="text-primary">❯</span>
-              minimal · CLI-agnostic ·{" "}
+              Coding for developers · agent-agnostic ·{" "}
               <a
                 href={HARNESS_RELEASE.url}
                 target="_blank"
@@ -103,13 +103,13 @@ export default function Home() {
               </a>
             </Eyebrow>
             <h1 className="mt-6 text-4xl font-semibold tracking-tight sm:text-6xl">
-              A minimal, CLI-agnostic{" "}
-              <span className="text-primary text-glow">agent harness</span>.
+              A minimal coding harness
+              <span className="text-primary text-glow"> for developers</span>.
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-              Convention + skills + sub-agents + distilled best-practice docs —
-              with only thin shell glue as code. Drop it into any project; any
-              agent that can run a shell can use it.
+              Outer harness for long coding tasks — conventions + skills +
+              sub-agents + thin shell glue. Drop into a repo; keep a coding agent
+              on-task across sessions.
             </p>
             <p className="mx-auto mt-3 max-w-xl font-mono text-sm text-muted-foreground/80">
               The harness is the environment, not a program.
@@ -424,7 +424,7 @@ export default function Home() {
       <section id="install" className="scroll-mt-20 py-20">
         <Container>
           <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
-            <div>
+            <div className="min-w-0">
               <Eyebrow>
                 <FileTerminal className="size-3.5 text-primary" />
                 install
@@ -474,7 +474,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="lg:sticky lg:top-24">
+            <div className="min-w-0 lg:sticky lg:top-24">
               <Terminal command={INSTALL_CMD} label="bash" />
               <p className="mt-4 text-sm text-muted-foreground">
                 Skills install to{" "}

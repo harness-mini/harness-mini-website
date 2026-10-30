@@ -18,8 +18,8 @@ export function SiteFooter() {
             harness-mini
           </div>
           <p className="max-w-xs text-sm text-muted-foreground">
-            A minimal, CLI-agnostic agent harness. The harness is the
-            environment, not a program.
+            Coding for developers · agent-agnostic · files + shell. The harness
+            is the environment, not a program.
           </p>
           <p className="font-mono text-xs text-muted-foreground/80">
             documenting{" "}

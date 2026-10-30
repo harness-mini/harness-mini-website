@@ -6,7 +6,7 @@ export const ONE_LINER_INSTALL = 'tell your agent: "install harness-mini here"';
 
 /** Canonical one-paragraph description — single source for metadata + JSON-LD. */
 export const SITE_DESCRIPTION =
-  "A minimal, CLI-agnostic agent harness: convention + skills + sub-agents + distilled best-practice docs, with only thin shell glue as code. The harness is the environment, not a program.";
+  "Outer harness for long coding tasks — conventions + skills + sub-agents + thin shell glue. Drop into a repo; keep a coding agent on-task across sessions. The harness is the environment, not a program.";
 
 /**
  * The harness-mini release this site documents.
