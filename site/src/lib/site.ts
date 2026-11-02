@@ -16,9 +16,9 @@ export const SITE_DESCRIPTION =
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.11.0", // x-release-tag
-  date: "2026-10-30", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.11.0", // x-release-url
+  tag: "v0.12.0", // x-release-tag
+  date: "2026-11-02", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.12.0", // x-release-url
   headline: "Five-Step retires as a skill, core-mind, and mandatory intake gate. The harness keeps a plain delete-first discipline under the Mini constraint, and the founder funnel is now founder-check → to-prd → to-issues.",
 } as const;
 
