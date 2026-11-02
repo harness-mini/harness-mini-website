@@ -16,10 +16,10 @@ export const SITE_DESCRIPTION =
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.11.0", // x-release-tag
-  date: "2026-10-30", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.11.0", // x-release-url
-  headline: "Five-Step retires as a skill, core-mind, and mandatory intake gate. The harness keeps a plain delete-first discipline under the Mini constraint, and the founder funnel is now founder-check → to-prd → to-issues.",
+  tag: "v0.12.0", // x-release-tag
+  date: "2026-11-02", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.12.0", // x-release-url
+  headline: "The session path ships: every plan is now a dual file (.md narrative + .json machine workboard), harness.sh status prints path: init|coding, and two session playbooks — session-init (plan-layer only) and session-coding with the five-step Getting Bearings — sit behind a path-aware routing gate, with an optional unattended runner (bin/session.sh).",
 } as const;
 
 /** Short version string, derived from {@link HARNESS_RELEASE}. */
@@ -79,6 +79,8 @@ export type Skill = {
 
 export const SKILLS: Skill[] = [
   { name: "stage-viewer", stage: "orchestrate", blurb: "The single authority that moves a plan through the FSM. Main-agent only — no sub-agent self-promotes. Documents a plan-stage write ban (convention only) for intake/prd/issues — no product-code edits until the walking skeleton is authorized." },
+  { name: "session-init", stage: "orchestrate", blurb: "Plan-layer playbook for boards where status prints path: init — founder funnel, PRD, issues, the JSON twin. Branches on the board (greenfield · recon seed · stuck stage · broken twin) and enforces the write ban: no product code on this path." },
+  { name: "session-coding", stage: "orchestrate", blurb: "Coding playbook for path: coding boards. First turn is a mandatory five-step Getting Bearings (pwd · status + recent commits + latest checkpoint · select the next passes:false slice · app baseline green — never the harness installer · report the slice), then exactly one slice, test-first, routed through evaluate." },
   { name: "ralph-loop", stage: "orchestrate", blurb: "Drive a long-running work → check → repeat loop until criteria pass or a human-judgment flag is raised." },
   { name: "checkpoint", stage: "orchestrate", blurb: "Write a committed handoff so a fresh session resumes with zero loss — while the agent is still sharp. Includes an additive ## Task state block (acceptance / footprint / last green / open issues) so cold resume is plan-scoped and honest." },
   { name: "grill-me", stage: "orchestrate", blurb: "Interview the user relentlessly about a plan until every branch of the decision tree is resolved." },

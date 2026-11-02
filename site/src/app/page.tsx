@@ -285,9 +285,12 @@ export default function Home() {
               A lifecycle you live inside
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Every requirement is a file with a{" "}
-              <code className="font-mono text-sm">stage:</code> field. Work flows
-              through a fixed FSM — and only the main agent may advance it.
+              Every requirement is a dual-file plan — a{" "}
+              <code className="font-mono text-sm">.md</code> narrative with a{" "}
+              <code className="font-mono text-sm">stage:</code> field plus a{" "}
+              <code className="font-mono text-sm">.json</code> machine workboard.
+              Work flows through a fixed FSM — and only the main agent may
+              advance it.
             </p>
           </div>
 

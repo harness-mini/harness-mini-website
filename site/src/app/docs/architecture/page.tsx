@@ -20,6 +20,7 @@ bin/
   ctx-hook.sh          # opt-in host PostToolUse ctx sampler → checkpoint nudge
   trace.sh             # append runtime JSONL (best-effort, never blocks)
   ralph.sh             # ralph-loop driver (work → check → repeat)
+  session.sh           # Outer session runner (optional P2): force the matching session-* playbook into a fresh context
   model.sh             # resolve each sub-agent's model tier (builder upgrades to the top tier)
 skills/                # source skills: skills/<name>/SKILL.md → .claude/skills/
 agents/                # source sub-agents: <name>.md → .claude/agents/
@@ -28,7 +29,7 @@ docs/
   smart-dumb.md        # the 40% occupancy contract
   assumptions.md       # load-bearing assumptions as hypotheses-with-a-test
   exec-plans/
-    active/            # in-flight plans + decision logs (committed)
+    active/            # in-flight dual-file plans (.md + .json twin) + decision logs (committed)
     completed/         # archived plans (committed)
   references/          # *-llms.txt distillates of the source blogs
 bench/cib/             # context-intelligence benchmark — the live test of the 40% line
@@ -74,25 +75,21 @@ export default function ArchitecturePage() {
           checkpoint count — so the thresholds are tuned by data, not vibes).
         </p>
         <p>
-          <code>status</code> ends with a single{" "}
-          <code>ready: &lt;ready|warning|blocked&gt; — &lt;next&gt;</code> verdict
-          (OpenHarness dry-run idea, Mini-shaped) so a cold session doesn&apos;t
-          re-derive &quot;what next&quot; from raw facts.{" "}
+          <code>status</code> also prints each active plan&apos;s{" "}
+          <strong>workboard line</strong> from its JSON twin (
+          <code>status · n/m pass · current · next passes:false</code> slice) and
+          the <strong>session path</strong> — two machine lines,{" "}
+          <code>path: init|coding</code> + <code>path_reason:</code>, derived
+          only from file truth (MD <code>stage:</code> + the twin). It ends with
+          a single <code>ready: &lt;ready|warning|blocked&gt; — &lt;next&gt;</code>{" "}
+          verdict (OpenHarness dry-run idea, Mini-shaped) so a cold session
+          doesn&apos;t re-derive &quot;what next&quot; from raw facts.{" "}
           <strong>blocked</strong> only for an install-broken tree or an active{" "}
           <code>done</code> plan without <code>verdict: pass</code>;{" "}
           <strong>warnings</strong> cover no plan, garden DUE,{" "}
           <code>.new</code> conflicts, behind-latest, and partial resume. Resumable
           is <strong>plan-scoped</strong> — foreign checkpoints no longer lie.
           Assumption <strong>A6</strong> in <code>docs/assumptions.md</code>.
-        </p>
-        <p>
-          On a fresh session the <strong>routing gate</strong> and{" "}
-          <code>stage-viewer</code> run <code>harness.sh version</code> first, so
-          the agent checks for a newer release before routing work and offers an{" "}
-          <code>update</code> if one exists — surfaced as a semver verdict from{" "}
-          <code>version</code>, an <code>update:</code> line in <code>status</code>,
-          and a WARN (never a FAIL) from <code>doctor</code>. Best-effort: silent
-          offline.
         </p>
       </Prose>
 
@@ -104,7 +101,12 @@ export default function ArchitecturePage() {
         <ul>
           <li>
             State lives in each <code>docs/exec-plans/active/&lt;plan&gt;.md</code>{" "}
-            frontmatter (<code>stage:</code>).
+            frontmatter (<code>stage:</code>) — the lifecycle authority —
+            mirrored by a same-basename <strong>JSON twin</strong> (
+            <code>status</code>, <code>current_slice_id</code>,{" "}
+            <code>slices[].passes</code>). <code>passes</code> flips to true only
+            via the main agent <em>after an evaluator verdict</em>; the twin&apos;s{" "}
+            <code>steps</code> are test conditions and are never altered.
           </li>
           <li>
             <strong>Transition authority:</strong> agents work freely <em>within</em>{" "}
@@ -128,6 +130,42 @@ export default function ArchitecturePage() {
             Documented in <code>stage-viewer</code> + the planner; assumption{" "}
             <strong>A7</strong>. The walking skeleton starts at{" "}
             <code>implement</code>.
+          </li>
+        </ul>
+
+        <h2>The session path (v0.12)</h2>
+        <p>
+          Every session starts from file truth, not memory. The{" "}
+          <strong>routing gate</strong> runs <code>harness.sh status</code>{" "}
+          first and branches on its <code>path:</code> line:
+        </p>
+      </Prose>
+      <CodeBlock>{`$ bin/harness.sh status
+active plans:
+  demo-auth                stage: implement
+     workboard: in_progress · 1/3 pass · current: slice-002 · next: slice-002
+path: coding
+path_reason: next slice ready
+ready: ready — slice-002: write the failing 401 test, then bcrypt verification`}</CodeBlock>
+      <Prose className="mt-2">
+        <ul>
+          <li>
+            <code>path: init</code> → the <code>session-init</code> skill:
+            plan-layer work only (funnel, PRD, issues, the twin) —{" "}
+            <strong>no product code</strong> on this path.
+          </li>
+          <li>
+            <code>path: coding</code> → the <code>session-coding</code> skill: a
+            mandatory five-step <strong>Getting Bearings</strong> first turn,
+            then exactly <strong>one slice</strong>, test-first, verified
+            against the twin&apos;s <code>steps</code> and routed through{" "}
+            <code>evaluate</code>.
+          </li>
+          <li>
+            A missing/unparseable twin degrades conservatively to{" "}
+            <code>init</code> — coding must be proven from files. For
+            unattended runs, <code>bin/session.sh -- &lt;your-host-cli&gt; …</code>{" "}
+            forces the matching playbook into a fresh context (optional P2).
           </li>
         </ul>
 
@@ -178,10 +216,13 @@ export default function ArchitecturePage() {
           Either way, install seeds a <strong>routing gate</strong> into each
           CLI&apos;s always-on file — <code>CLAUDE.md</code>,{" "}
           <code>.cursor/rules/</code>, <code>AGENTS.md</code> — so the harness is
-          preferred by default: route non-trivial work through{" "}
-          <code>stage-viewer</code> first, and when a harness skill and another
-          tool both fit, the harness skill wins. Additive and idempotent — an
-          existing <code>CLAUDE.md</code> is never clobbered.
+          preferred by default: run <code>harness.sh status</code> first, branch
+          on its <code>path:</code> line (see{" "}
+          <em>The session path</em> above), route non-trivial work through{" "}
+          <code>stage-viewer</code>, and when a harness skill and another tool
+          both fit, the harness skill wins. Additive and idempotent — an
+          existing <code>CLAUDE.md</code> is never clobbered, and older gate
+          versions are upgraded in place (marker-guarded, exactly one gate).
         </p>
       </Prose>
 
