@@ -16,10 +16,10 @@ export const SITE_DESCRIPTION =
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.12.0", // x-release-tag
-  date: "2026-11-02", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.12.0", // x-release-url
-  headline: "The session path ships: every plan is now a dual file (.md narrative + .json machine workboard), harness.sh status prints path: init|coding, and two session playbooks — session-init (plan-layer only) and session-coding with the five-step Getting Bearings — sit behind a path-aware routing gate, with an optional unattended runner (bin/session.sh).",
+  tag: "v0.12.1", // x-release-tag
+  date: "2026-11-06", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.12.1", // x-release-url
+  headline: "Checkpointing now has verifiable state: structured Footprint entries, bounded source-line snapshots, no-op suppression, and optional last-green test evidence.",
 } as const;
 
 /** Short version string, derived from {@link HARNESS_RELEASE}. */
@@ -82,7 +82,7 @@ export const SKILLS: Skill[] = [
   { name: "session-init", stage: "orchestrate", blurb: "Plan-layer playbook for boards where status prints path: init — founder funnel, PRD, issues, the JSON twin. Branches on the board (greenfield · recon seed · stuck stage · broken twin) and enforces the write ban: no product code on this path." },
   { name: "session-coding", stage: "orchestrate", blurb: "Coding playbook for path: coding boards. First turn is a mandatory five-step Getting Bearings (pwd · status + recent commits + latest checkpoint · select the next passes:false slice · app baseline green — never the harness installer · report the slice), then exactly one slice, test-first, routed through evaluate." },
   { name: "ralph-loop", stage: "orchestrate", blurb: "Drive a long-running work → check → repeat loop until criteria pass or a human-judgment flag is raised." },
-  { name: "checkpoint", stage: "orchestrate", blurb: "Write a committed handoff so a fresh session resumes with zero loss — while the agent is still sharp. Includes an additive ## Task state block (acceptance / footprint / last green / open issues) so cold resume is plan-scoped and honest." },
+  { name: "checkpoint", stage: "orchestrate", blurb: "Write a committed handoff while context is sharp. Includes structured Footprint entries, validated source-line snapshots, no-op suppression, and last-green test evidence." },
   { name: "grill-me", stage: "orchestrate", blurb: "Interview the user relentlessly about a plan until every branch of the decision tree is resolved." },
   { name: "founder-check", stage: "intake", blurb: "Greenfield-only gate: who is the user, the smallest valuable slice, the riskiest assumption, the BML loop." },
   { name: "to-prd", stage: "plan", blurb: "Turn a raw idea into an executable PRD — a versioned, agent-readable, testable source of truth." },
