@@ -16,9 +16,9 @@ export const SITE_DESCRIPTION =
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.12.0", // x-release-tag
-  date: "2026-11-02", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.12.0", // x-release-url
+  tag: "v0.12.1", // x-release-tag
+  date: "2026-11-06", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.12.1", // x-release-url
   headline: "The session path ships: every plan is now a dual file (.md narrative + .json machine workboard), harness.sh status prints path: init|coding, and two session playbooks — session-init (plan-layer only) and session-coding with the five-step Getting Bearings — sit behind a path-aware routing gate, with an optional unattended runner (bin/session.sh).",
 } as const;
 
