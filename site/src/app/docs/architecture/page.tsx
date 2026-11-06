@@ -17,12 +17,13 @@ bin/
   harness.sh           # front-door CLI: version · update · release · report · doctor · status
   _harness_lib.sh      # shared helpers (managed set, checksums, semver compare)
   ctx.sh               # context % estimate vs the 40% threshold
-  ctx-hook.sh          # opt-in host PostToolUse ctx sampler → checkpoint nudge
+  ctx-hook.sh          # opt-in PostToolUse sampler → checkpoint nudge + last-green test stamp
   trace.sh             # append runtime JSONL (best-effort, never blocks)
   ralph.sh             # ralph-loop driver (work → check → repeat)
   session.sh           # Outer session runner (optional P2): force the matching session-* playbook into a fresh context
   model.sh             # resolve each sub-agent's model tier (builder upgrades to the top tier)
 skills/                # source skills: skills/<name>/SKILL.md → .claude/skills/
+  checkpoint/scripts/   # skill-owned Footprint lint, source snapshots, and no-op guard
 agents/                # source sub-agents: <name>.md → .claude/agents/
 docs/
   principles.md        # golden principles + the Mini delete-first constraint
@@ -33,7 +34,7 @@ docs/
     completed/         # archived plans (committed)
   references/          # *-llms.txt distillates of the source blogs
 bench/cib/             # context-intelligence benchmark — the live test of the 40% line
-tests/run.sh           # zero-dep TDD suite for bin/* and init.sh
+tests/run.sh           # zero-dep TDD suite for bin/*, skill scripts, and init.sh
 harness/
   manifest.md          # neutral pointer list for other CLIs
   harness.lock         # version + pristine checksums of managed files
