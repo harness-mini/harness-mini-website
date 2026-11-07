@@ -9,40 +9,34 @@ export const metadata: Metadata = {
     "Repository layout, the lifecycle FSM, the horizontal+vertical coding contract, and how install behaves on new vs existing projects.",
 };
 
-const LAYOUT = `AGENTS.md              # ~100-line map injected every run (table of contents)
-ARCHITECTURE.md        # this file
-VERSION                # canonical version (e.g. 0.7.1)
-init.sh                # additive, idempotent installer (new vs existing)
-bin/
-  harness.sh           # front-door CLI: version · update · release · report · doctor · status
-  _harness_lib.sh      # shared helpers (managed set, checksums, semver compare)
-  ctx.sh               # context % estimate vs the 40% threshold
-  ctx-hook.sh          # opt-in PostToolUse sampler → checkpoint nudge + last-green test stamp
-  trace.sh             # append runtime JSONL (best-effort, never blocks)
-  ralph.sh             # ralph-loop driver (work → check → repeat)
-  session.sh           # Outer session runner (optional P2): force the matching session-* playbook into a fresh context
-  model.sh             # resolve each sub-agent's model tier (builder upgrades to the top tier)
-skills/                # source skills: skills/<name>/SKILL.md → .claude/skills/
-  checkpoint/scripts/   # skill-owned Footprint lint, source snapshots, and no-op guard
-agents/                # source sub-agents: <name>.md → .claude/agents/
-docs/
-  principles.md        # golden principles + the Mini delete-first constraint
-  smart-dumb.md        # the 40% occupancy contract
-  assumptions.md       # load-bearing assumptions as hypotheses-with-a-test
-  exec-plans/
-    active/            # in-flight dual-file plans (.md + .json twin) + decision logs (committed)
-    completed/         # archived plans (committed)
-  references/          # *-llms.txt distillates of the source blogs
-bench/cib/             # context-intelligence benchmark — the live test of the 40% line
-tests/run.sh           # zero-dep TDD suite for bin/*, skill scripts, and init.sh
-harness/
-  manifest.md          # neutral pointer list for other CLIs
-  harness.lock         # version + pristine checksums of managed files
-.trace/
-  checkpoints/         # COMMITTED — decisions, milestones, handoffs
-  evals/               # COMMITTED — eval verdicts (tier · verdict · criteria)
-  garden-backlog.md    # COMMITTED — out-of-scope smells awaiting a sweep
-  runtime/             # GITIGNORED — ephemeral per-run JSONL`;
+const LAYOUT = `# Two file classes (zero-intrusion install)
+
+<project>/.harness-mini/     # PROJECT PROGRESS — committed (except trace/runtime/)
+  .gitignore                 #   ignores trace/runtime/ (the project's own .gitignore stays untouched)
+  architecture.md            #   this project's recon output (the explorer fills it)
+  docs/exec-plans/
+    active/                  #   in-flight dual-file plans (.md + .json twin) + decision logs
+    completed/               #   archived plans
+  trace/
+    checkpoints/             #   COMMITTED — decisions, milestones, handoffs
+    evals/                   #   COMMITTED — <plan>-NNN.md verdicts (the done-gate)
+    garden-backlog.md        #   COMMITTED — smell backlog
+    runtime/                 #   GITIGNORED — ephemeral per-run JSONL (report reads these)
+
+$HARNESS_HOME/               # HARNESS-OWNED — default ~/.harness-mini/
+  bin/                       #   executables (harness.sh, ctx.sh, trace.sh, ...)
+  VERSION · harness/runtime.lock   # version + checksums of bin/*
+  AGENTS.md                  #   the full agent map (the project block points here)
+  docs/                      #   static docs: principles, smart-dumb, templates, walkthrough
+  skills/  agents/           #   sources that agent install <host> copies from
+  <project-id>/              #   per-project bookkeeping
+    harness.lock · manifest.md · targets
+
+# Besides .harness-mini/, an install writes only:
+#   one <!-- harness-mini:begin/end --> block in the root AGENTS.md,
+#   lines in the local .git/info/exclude, and — after agent install —
+#   the host's skills/agents dirs. No docs/, bin/, ARCHITECTURE.md,
+#   CLAUDE.md, or .gitignore edits in your project.`;
 
 const FSM = `intake → prd → issues → implement ⇄ evaluate → checkpoint → done
                            ↑___________|   (loop until criteria pass)
@@ -61,19 +55,25 @@ export default function ArchitecturePage() {
           How harness-mini is laid out and how work flows through it.
         </p>
 
-        <h2>Repository layout</h2>
+        <h2>Two file classes: layout</h2>
       </Prose>
       <CodeBlock>{LAYOUT}</CodeBlock>
       <Prose className="mt-2">
         <p>
-          <code>bin/harness.sh</code> is the front door: <code>version</code>{" "}
-          (which also reports whether a newer harness-mini exists), <code>update</code>{" "}
-          (checksum-guarded sync that keeps your edits) and <code>release</code>,
-          plus <code>doctor</code> (an install health check), <code>status</code>{" "}
+          <code>~/.harness-mini/bin/harness.sh</code> is the front door:{" "}
+          <code>version</code> (which also reports whether a newer harness-mini
+          exists), <code>update</code> (checksum-guarded sync that keeps your
+          edits, refreshes the global copies, and migrates a pre-0.13 layout),{" "}
+          <code>agent list | install &lt;host&gt;</code> (host-aware skills +
+          roles for 16 coding-agent hosts), <code>diff</code> (compare a kept
+          file against its upstream <code>.new</code>), and{" "}
+          <code>release</code>, plus <code>doctor</code> (an install health
+          check, including installed-drift on skills), <code>status</code>{" "}
           (current work state for a cold resume), and <code>report</code> (a
-          pure-shell aggregator over <code>.trace/</code> — stage advances, the
-          context trend vs the 40% line, eval pass/fail and rework loops,
-          checkpoint count — so the thresholds are tuned by data, not vibes).
+          pure-shell aggregator over <code>.harness-mini/trace/</code> — stage
+          advances, the context trend vs the 40% line, eval pass/fail and
+          rework loops, checkpoint count — so the thresholds are tuned by
+          data, not vibes).
         </p>
         <p>
           <code>status</code> also prints each active plan&apos;s{" "}
@@ -101,7 +101,8 @@ export default function ArchitecturePage() {
       <Prose className="mt-2">
         <ul>
           <li>
-            State lives in each <code>docs/exec-plans/active/&lt;plan&gt;.md</code>{" "}
+            State lives in each{" "}
+            <code>.harness-mini/docs/exec-plans/active/&lt;plan&gt;.md</code>{" "}
             frontmatter (<code>stage:</code>) — the lifecycle authority —
             mirrored by a same-basename <strong>JSON twin</strong> (
             <code>status</code>, <code>current_slice_id</code>,{" "}
@@ -119,7 +120,7 @@ export default function ArchitecturePage() {
             lightweight reviewer · L2 full Opus); the firewall is the{" "}
             <em>separate context</em>, not the model. The gate has teeth: every
             evaluation writes a committed verdict to{" "}
-            <code>.trace/evals/&lt;plan&gt;-NNN.md</code>, and{" "}
+            <code>.harness-mini/trace/evals/&lt;plan&gt;-NNN.md</code>, and{" "}
             <code>stage-viewer</code> won&apos;t promote a plan to{" "}
             <code>done</code> without a <code>verdict: pass</code> —{" "}
             <code>doctor</code> <strong>fails</strong> any that slips through.
@@ -134,14 +135,14 @@ export default function ArchitecturePage() {
           </li>
         </ul>
 
-        <h2>The session path (v0.12)</h2>
+        <h2>The session path (v0.13)</h2>
         <p>
           Every session starts from file truth, not memory. The{" "}
           <strong>routing gate</strong> runs <code>harness.sh status</code>{" "}
           first and branches on its <code>path:</code> line:
         </p>
       </Prose>
-      <CodeBlock>{`$ bin/harness.sh status
+      <CodeBlock>{`$ "$HOME/.harness-mini/bin/harness.sh" --root "$PWD" status
 active plans:
   demo-auth                stage: implement
      workboard: in_progress · 1/3 pass · current: slice-002 · next: slice-002
@@ -165,7 +166,8 @@ ready: ready — slice-002: write the failing 401 test, then bcrypt verification
           <li>
             A missing/unparseable twin degrades conservatively to{" "}
             <code>init</code> — coding must be proven from files. For
-            unattended runs, <code>bin/session.sh -- &lt;your-host-cli&gt; …</code>{" "}
+            unattended runs,{" "}
+            <code>~/.harness-mini/bin/session.sh -- &lt;your-host-cli&gt; …</code>{" "}
             forces the matching playbook into a fresh context (optional P2).
           </li>
         </ul>
@@ -208,22 +210,27 @@ ready: ready — slice-002: write the failing 401 test, then bcrypt verification
             to-prd → to-issues).
           </li>
           <li>
-            <strong>existing</strong> → recon graft: seed <code>0001-recon.md</code>,
-            the explorer maps the codebase into <code>ARCHITECTURE.md</code>; skip
-            the founder funnel; install additively without overwriting anything.
+          <strong>existing</strong> → recon graft: seed{" "}
+          <code>0001-recon.md</code>, the explorer maps the codebase into{" "}
+          <code>.harness-mini/architecture.md</code>; skip the founder funnel;
+          install additively without overwriting anything.
           </li>
         </ul>
         <p>
-          Either way, install seeds a <strong>routing gate</strong> into each
-          CLI&apos;s always-on file — <code>CLAUDE.md</code>,{" "}
-          <code>.cursor/rules/</code>, <code>AGENTS.md</code> — so the harness is
-          preferred by default: run <code>harness.sh status</code> first, branch
-          on its <code>path:</code> line (see{" "}
-          <em>The session path</em> above), route non-trivial work through{" "}
-          <code>stage-viewer</code>, and when a harness skill and another tool
-          both fit, the harness skill wins. Additive and idempotent — an
-          existing <code>CLAUDE.md</code> is never clobbered, and older gate
-          versions are upgraded in place (marker-guarded, exactly one gate).
+          Either way, install grafts a <strong>routing gate</strong> as one
+          marked <code>&lt;!-- harness-mini:begin/end --&gt;</code> block in
+          the project&apos;s root <code>AGENTS.md</code> (the file is created
+          holding only the block if absent; text outside the block is never
+          touched) so the harness is preferred by default: run{" "}
+          <code>harness.sh status</code> first, branch on its{" "}
+          <code>path:</code> line (see <em>The session path</em> above), route
+          non-trivial work through <code>stage-viewer</code>, and when a
+          harness skill and another tool both fit, the harness skill wins. The
+          block tells the agent to run <code>agent list</code> then{" "}
+          <code>agent install &lt;host&gt;</code> — <code>init.sh</code>{" "}
+          itself is host-blind and installs no skills or agents. Additive and
+          idempotent; a pre-0.13 install is migrated automatically on
+          re-run, and nothing is removed unless it is safe.
         </p>
       </Prose>
 

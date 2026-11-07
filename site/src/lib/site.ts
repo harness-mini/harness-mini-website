@@ -1,7 +1,7 @@
 export const REPO_URL = "https://github.com/harness-mini/harness-mini";
 export const SITE_URL = "https://harness-mini-website.vercel.app";
 export const INSTALL_CMD =
-  "git clone https://github.com/harness-mini/harness-mini.git\nbash harness-mini/init.sh /path/to/your/project";
+  "git clone https://github.com/harness-mini/harness-mini.git\nbash harness-mini/init.sh /path/to/your/project\n\"$HOME/.harness-mini/bin/harness.sh\" agent list\n\"$HOME/.harness-mini/bin/harness.sh\" agent install <host>";
 export const ONE_LINER_INSTALL = 'tell your agent: "install harness-mini here"';
 
 /** Canonical one-paragraph description — single source for metadata + JSON-LD. */
@@ -16,10 +16,10 @@ export const SITE_DESCRIPTION =
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.12.1", // x-release-tag
-  date: "2026-11-06", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.12.1", // x-release-url
-  headline: "Checkpointing now has verifiable state: structured Footprint entries, bounded source-line snapshots, no-op suppression, and optional last-green test evidence.",
+  tag: "v0.13.0", // x-release-tag
+  date: "2026-11-07", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.13.0", // x-release-url
+  headline: "Zero-intrusion install (breaking): the runtime now lives under ~/.harness-mini/, a project receives only .harness-mini/ plus one AGENTS.md block — plus a host-aware agent list|install for 16 coding-agent hosts, and automatic migration from pre-0.13 layouts.",
 } as const;
 
 /** Short version string, derived from {@link HARNESS_RELEASE}. */
@@ -92,7 +92,7 @@ export const SKILLS: Skill[] = [
   { name: "parallel-slices", stage: "implement", blurb: "The implement stage's write fan-out: once the vertical skeleton passes evaluate, build the independent issues in parallel — one generator each, gated on disjoint file footprints — then a single integration evaluate." },
   { name: "clean-code", stage: "implement", blurb: "The forward quality constraint: intention-revealing names, small functions, no duplication, why-not-what comments." },
   { name: "refactor", stage: "implement", blurb: "The recovery constraint: smell → named refactoring, always under green tests, one move at a time." },
-  { name: "evaluate", stage: "evaluate", blurb: "Grade work against acceptance criteria from a separate context, tiered by risk: L0 self-check · L1 lightweight reviewer (default) · L2 full Opus. The firewall is the separate context, not the model — and it writes a committed verdict to .trace/evals/, so \"done\" is earned, not self-declared." },
+  { name: "evaluate", stage: "evaluate", blurb: "Grade work against acceptance criteria from a separate context, tiered by risk: L0 self-check · L1 lightweight reviewer (default) · L2 full Opus. The firewall is the separate context, not the model — and it writes a committed verdict to .harness-mini/trace/evals/, so \"done\" is earned, not self-declared." },
   { name: "release", stage: "maintain", blurb: "Cut a versioned release — bump VERSION, roll the CHANGELOG, tag, and publish a GitHub release. Wraps bin/harness.sh release; owns the semver + changelog judgment the script can't." },
   { name: "garden", stage: "maintain", blurb: "Entropy GC: scan for drift — stale docs, dead context, smells — and open small targeted fixes. Fires on concrete signals — a checkpoint cadence (≥5 since the last sweep) and a committed smell backlog — not a vague \"periodically.\"" },
 ];

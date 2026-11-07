@@ -335,12 +335,11 @@ export default function Home() {
               {SKILLS.length} skills, by stage
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Skills use the common coding-agent layout{" "}
-              <code className="font-mono text-sm">.claude/skills/</code> and encode{" "}
-              <em>how</em> to do a task — invoked at the right point in the
-              lifecycle. See{" "}
-              <code className="font-mono text-sm">harness/manifest.md</code> for
-              agent-neutral pointers.
+              Skills encode <em>how</em> to do a task — invoked at the right point
+              in the lifecycle. Install them host-aware with{" "}
+              <code className="font-mono text-sm">agent install &lt;host&gt;</code>{" "}
+              — each of 16 coding-agent hosts gets skills and roles in the dirs it
+              natively reads.
             </p>
           </div>
 
@@ -443,7 +442,10 @@ export default function Home() {
                 is <strong className="text-foreground">additive</strong> (never
                 overwrites your files) and{" "}
                 <strong className="text-foreground">idempotent</strong> (safe to
-                re-run).
+                re-run); it installs the runtime once under{" "}
+                <code className="font-mono text-sm">~/.harness-mini/</code> and{" "}
+                <code className="font-mono text-sm">agent install &lt;host&gt;</code>{" "}
+                then places skills and roles for your coding agent.
               </p>
 
               <div className="mt-6 space-y-4">
@@ -473,7 +475,7 @@ export default function Home() {
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     Recon graft — installs additively and seeds a recon plan; the
                     explorer maps your codebase into{" "}
-                    <code className="font-mono text-xs">ARCHITECTURE.md</code>.
+                    <code className="font-mono text-xs">.harness-mini/architecture.md</code>.
                   </p>
                 </div>
               </div>
@@ -482,11 +484,15 @@ export default function Home() {
             <div className="min-w-0 lg:sticky lg:top-24">
               <Terminal command={INSTALL_CMD} label="bash" />
               <p className="mt-4 text-sm text-muted-foreground">
-                Skills and agents land in the conventional install dirs{" "}
-                <code className="font-mono text-xs">.claude/skills/</code> and{" "}
-                <code className="font-mono text-xs">.claude/agents/</code>;{" "}
-                <code className="font-mono text-xs">harness/manifest.md</code> is the
-                neutral pointer list for other CLIs.
+                Zero intrusion: the runtime, docs, and locks live under{" "}
+                <code className="font-mono text-xs">~/.harness-mini/</code>. The
+                project receives only{" "}
+                <code className="font-mono text-xs">.harness-mini/</code> (plans,
+                trace, architecture), one marked block in{" "}
+                <code className="font-mono text-xs">AGENTS.md</code>, and your
+                host&apos;s skills/agents dirs — your{" "}
+                <code className="font-mono text-xs">.gitignore</code> is never
+                edited.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
@@ -536,7 +542,7 @@ function FortyMeter() {
       </div>
       <p className="mt-3 font-mono text-xs text-muted-foreground">
         configurable via HARNESS_CTX_THRESHOLD · estimate with{" "}
-        <span className="text-foreground">bin/ctx.sh &lt;used&gt; [window]</span>
+        <span className="text-foreground">~/.harness-mini/bin/ctx.sh &lt;used&gt; [window]</span>
       </p>
     </div>
   );
