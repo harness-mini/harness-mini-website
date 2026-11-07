@@ -231,7 +231,7 @@ export default function FortyLinePage() {
         <p>
           Crossing 40% does not mean “stop blindly.” It means:{" "}
           <strong>checkpoint now, while you are still sharp.</strong> Write{" "}
-          <code>.trace/checkpoints/&lt;plan&gt;-&lt;seq&gt;.md</code>, update the
+          <code>.harness-mini/trace/checkpoints/&lt;plan&gt;-&lt;seq&gt;.md</code>, update the
           active exec-plan, then reset to a fresh session that bootstraps from that
           artifact. Waiting until 90% is fatal — the handoff itself would be
           written by a degraded agent.
@@ -239,16 +239,16 @@ export default function FortyLinePage() {
 
         <h3>3. Measurement — best-effort, to see drift</h3>
         <p>
-          <code>bin/ctx.sh &lt;used_tokens&gt; [window]</code> prints{" "}
+          <code>~/.harness-mini/bin/ctx.sh &lt;used_tokens&gt; [window]</code> prints{" "}
           <code>N%</code> and exits 2 at/over threshold. You cannot portably read a
           model&apos;s internal token counter, so this is an estimate. On hosts
           that support a PostToolUse hook, the opt-in{" "}
-          <code>bin/ctx-hook.sh</code> adapter does better — it records a{" "}
+          <code>~/.harness-mini/bin/ctx-hook.sh</code> adapter does better — it records a{" "}
           <code>ctx_pct</code> sample after each tool call and nudges you to
           checkpoint once you cross the line.{" "}
           <code>harness.sh report</code> then aggregates those samples into a
           context trend (sample count, max %, crossings) — enough to watch drift
-          in <code>.trace/</code>, not a hard interrupt.
+          in <code>.harness-mini/trace/</code>, not a hard interrupt.
         </p>
 
         <h3>4. Progressive disclosure keeps the baseline low</h3>
