@@ -16,9 +16,9 @@ export const SITE_DESCRIPTION =
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.12.1", // x-release-tag
-  date: "2026-11-06", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.12.1", // x-release-url
+  tag: "v0.13.0", // x-release-tag
+  date: "2026-11-07", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.13.0", // x-release-url
   headline: "Checkpointing now has verifiable state: structured Footprint entries, bounded source-line snapshots, no-op suppression, and optional last-green test evidence.",
 } as const;
 
