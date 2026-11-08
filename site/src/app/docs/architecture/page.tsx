@@ -29,8 +29,9 @@ $HARNESS_HOME/               # HARNESS-OWNED — default ~/.harness-mini/
   AGENTS.md                  #   the full agent map (the project block points here)
   docs/                      #   static docs: principles, smart-dumb, templates, walkthrough
   skills/  agents/           #   sources that agent install <host> copies from
-  <project-id>/              #   per-project bookkeeping
-    harness.lock · manifest.md · targets
+  projects/
+    <project-id>/            #   per-project bookkeeping (harness.lock · manifest.md · targets)
+                             #   0.13 state dirs move here automatically, never overwriting
 
 # Besides .harness-mini/, an install writes only:
 #   one <!-- harness-mini:begin/end --> block in the root AGENTS.md,
@@ -63,7 +64,9 @@ export default function ArchitecturePage() {
           <code>~/.harness-mini/bin/harness.sh</code> is the front door:{" "}
           <code>version</code> (which also reports whether a newer harness-mini
           exists), <code>update</code> (checksum-guarded sync that keeps your
-          edits, refreshes the global copies, and migrates a pre-0.13 layout),{" "}
+          edits, never downgrades the runtime unless{" "}
+          <code>--force</code>, refreshes the global copies, and migrates a
+          pre-0.13 layout),{" "}
           <code>agent list | install &lt;host&gt;</code> (host-aware skills +
           roles for 16 coding-agent hosts), <code>diff</code> (compare a kept
           file against its upstream <code>.new</code>), and{" "}
