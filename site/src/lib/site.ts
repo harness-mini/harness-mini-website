@@ -16,10 +16,10 @@ export const SITE_DESCRIPTION =
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.14.0", // x-release-tag
-  date: "2026-11-07", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.14.0", // x-release-url
-  headline: "Zero-intrusion install (breaking): the runtime now lives under ~/.harness-mini/, a project receives only .harness-mini/ plus one AGENTS.md block — plus a host-aware agent list|install for 16 coding-agent hosts, and automatic migration from pre-0.13 layouts.",
+  tag: "v0.14.1", // x-release-tag
+  date: "2026-11-08", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.14.1", // x-release-url
+  headline: "Per-project state now lives under ~/.harness-mini/projects/<project-id>/ (moved automatically), so the top of HARNESS_HOME holds only the runtime — plus a garden sweep that makes the docs match the code (harness.sh diff, the update --force downgrade guard).",
 } as const;
 
 /** Short version string, derived from {@link HARNESS_RELEASE}. */
