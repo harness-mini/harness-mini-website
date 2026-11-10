@@ -4,13 +4,26 @@ export const INSTALL_CMD =
   "git clone https://github.com/harness-mini/harness-mini.git\nbash harness-mini/init.sh /path/to/your/project\n\"$HOME/.harness-mini/bin/harness.sh\" agent list\n\"$HOME/.harness-mini/bin/harness.sh\" agent install <host>";
 export const ONE_LINER_INSTALL = 'tell your agent: "install harness-mini here"';
 
-/** The "For agents" install tab: the instruction to paste into a coding
-    agent's chat. `copyText` is what the copy button grabs — the prompt line
-    only, not the surrounding commentary. */
+/** The "For agents" install tab: a self-contained prompt to paste into a
+    coding agent's chat. Names the repo explicitly — an agent given just
+    "install harness-mini here" has no idea which project that is.
+    `copyText` is what the copy button grabs: the prompt itself, without
+    the leading commentary line. */
+const AGENT_INSTALL_PROMPT = [
+  "Install harness-mini in this project. It is an agent harness",
+  "(plain files + shell) hosted at",
+  REPO_URL,
+  "Steps:",
+  `1. git clone ${REPO_URL}.git`,
+  "2. bash harness-mini/init.sh /path/to/this/project",
+  '3. "$HOME/.harness-mini/bin/harness.sh" agent install <host>',
+  "init.sh is additive and idempotent; the runtime lives under",
+  "~/.harness-mini/ and your .gitignore is never touched.",
+].join("\n");
+
 export const AGENT_INSTALL = {
-  command:
-    '# paste this into your coding agent\'s chat\ninstall harness-mini here\n# it reads the repo, runs init.sh, and wires your host\'s\n# skills + agents dirs — additive and idempotent',
-  copyText: "install harness-mini here",
+  command: `# paste this into your coding agent's chat\n${AGENT_INSTALL_PROMPT}`,
+  copyText: AGENT_INSTALL_PROMPT,
 } as const;
 
 /** Canonical one-paragraph description — single source for metadata + JSON-LD. */
