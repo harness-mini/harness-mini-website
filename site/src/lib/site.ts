@@ -4,6 +4,23 @@ export const INSTALL_CMD =
   "git clone https://github.com/harness-mini/harness-mini.git\nbash harness-mini/init.sh /path/to/your/project\n\"$HOME/.harness-mini/bin/harness.sh\" agent list\n\"$HOME/.harness-mini/bin/harness.sh\" agent install <host>";
 export const ONE_LINER_INSTALL = 'tell your agent: "install harness-mini here"';
 
+/** The "For agents" install tab: a self-contained prompt to paste into a
+    coding agent's chat. Names the repo explicitly — an agent given just
+    "install harness-mini here" has no idea which project that is.
+    Kept to three lines (matching the "For human" tab's height) with long
+    lines that extend horizontally; `copyText` is what the copy button
+    grabs — the prompt itself, without the leading commentary line. */
+const AGENT_INSTALL_PROMPT = [
+  "Install harness-mini in this project — an agent harness of plain files + shell.",
+  `1. git clone ${REPO_URL}.git && bash harness-mini/init.sh <project-dir>`,
+  '2. "$HOME/.harness-mini/bin/harness.sh" agent install <host>  (additive + idempotent)',
+].join("\n");
+
+export const AGENT_INSTALL = {
+  command: `# paste this into your coding agent's chat\n${AGENT_INSTALL_PROMPT}`,
+  copyText: AGENT_INSTALL_PROMPT,
+} as const;
+
 /** Canonical one-paragraph description — single source for metadata + JSON-LD. */
 export const SITE_DESCRIPTION =
   "A minimal outer harness for developers' long coding tasks — repo conventions + skills + sub-agents + thin shell glue. Keep a coding agent on-task, context-light, and resumable across sessions. The contract is files + shell.";
