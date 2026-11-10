@@ -167,7 +167,7 @@ export default function Home() {
 
             <div
               className={cn(
-                "mx-auto mt-12 max-w-xl text-left",
+                "mx-auto mt-12 max-w-2xl text-left",
                 HERO_IN,
                 "delay-300",
               )}
