@@ -7,15 +7,25 @@ import { cn } from "@/lib/utils";
 type TerminalProps = {
   command: string;
   label?: string;
+  /** Text the copy button grabs; defaults to `command`. */
+  copyText?: string;
+  /** Render the `$ ` shell prompt before non-comment lines. */
+  prompt?: boolean;
   className?: string;
 };
 
-export function Terminal({ command, label = "bash", className }: TerminalProps) {
+export function Terminal({
+  command,
+  label = "bash",
+  copyText,
+  prompt = true,
+  className,
+}: TerminalProps) {
   const [copied, setCopied] = useState(false);
 
   async function copy() {
     try {
-      await navigator.clipboard.writeText(command);
+      await navigator.clipboard.writeText(copyText ?? command);
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     } catch {
@@ -67,11 +77,13 @@ export function Terminal({ command, label = "bash", className }: TerminalProps) 
               <span key={i} className="block whitespace-pre">
                 {isComment ? (
                   <span className="text-muted-foreground">{line}</span>
-                ) : (
+                ) : prompt ? (
                   <>
                     <span className="select-none text-primary">$ </span>
                     <span className="text-foreground">{line}</span>
                   </>
+                ) : (
+                  <span className="text-foreground">{line}</span>
                 )}
               </span>
             );

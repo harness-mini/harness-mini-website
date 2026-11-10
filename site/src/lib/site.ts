@@ -4,6 +4,15 @@ export const INSTALL_CMD =
   "git clone https://github.com/harness-mini/harness-mini.git\nbash harness-mini/init.sh /path/to/your/project\n\"$HOME/.harness-mini/bin/harness.sh\" agent list\n\"$HOME/.harness-mini/bin/harness.sh\" agent install <host>";
 export const ONE_LINER_INSTALL = 'tell your agent: "install harness-mini here"';
 
+/** The "For agents" install tab: the instruction to paste into a coding
+    agent's chat. `copyText` is what the copy button grabs — the prompt line
+    only, not the surrounding commentary. */
+export const AGENT_INSTALL = {
+  command:
+    '# paste this into your coding agent\'s chat\ninstall harness-mini here\n# it reads the repo, runs init.sh, and wires your host\'s\n# skills + agents dirs — additive and idempotent',
+  copyText: "install harness-mini here",
+} as const;
+
 /** Canonical one-paragraph description — single source for metadata + JSON-LD. */
 export const SITE_DESCRIPTION =
   "A minimal outer harness for developers' long coding tasks — repo conventions + skills + sub-agents + thin shell glue. Keep a coding agent on-task, context-light, and resumable across sessions. The contract is files + shell.";

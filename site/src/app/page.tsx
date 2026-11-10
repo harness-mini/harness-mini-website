@@ -17,14 +17,15 @@ import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Container, Eyebrow, ModelBadge } from "@/components/site/primitives";
 import { GithubIcon } from "@/components/site/icons";
-import { Terminal } from "@/components/site/terminal";
+import { InstallTerminal } from "@/components/site/install-terminal";
+import { Reveal } from "@/components/site/reveal";
+import { TypewriterHeadline } from "@/components/site/typewriter-headline";
 import { JsonLd } from "@/components/site/json-ld";
 import {
   AGENTS,
   CHANGELOG_URL,
   HARNESS_RELEASE,
   HARNESS_VERSION,
-  INSTALL_CMD,
   LIFECYCLE,
   REPO_URL,
   SKILLS,
@@ -76,6 +77,9 @@ const MECHANISMS = [
   },
 ];
 
+/* Staggered load-in for above-the-fold hero blocks (CSS-only, no JS needed). */
+const HERO_IN = "animate-in fade-in slide-in-from-bottom-4 duration-700 fill-mode-both";
+
 export default function Home() {
   return (
     <>
@@ -90,7 +94,7 @@ export default function Home() {
         />
         <Container className="relative py-20 sm:py-28">
           <div className="mx-auto max-w-3xl text-center">
-            <Eyebrow>
+            <Eyebrow className={HERO_IN}>
               <span className="text-primary">❯</span>
               Long coding tasks · files + shell ·{" "}
               <a
@@ -102,20 +106,35 @@ export default function Home() {
                 {HARNESS_VERSION}
               </a>
             </Eyebrow>
-            <h1 className="mt-6 text-4xl font-semibold tracking-tight sm:text-6xl">
-              A minimal outer harness
-              <span className="text-primary text-glow"> for long coding tasks</span>.
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+            <TypewriterHeadline className="mt-6 text-4xl font-semibold tracking-tight sm:text-6xl" />
+            <p
+              className={cn(
+                "mx-auto mt-6 max-w-2xl text-lg text-muted-foreground",
+                HERO_IN,
+                "delay-100",
+              )}
+            >
               Repo conventions + skills + sub-agents + thin shell glue keep a
               coding agent on-task, context-light, and resumable across sessions.
               Drop into a repo; any shell-capable agent can drive it.
             </p>
-            <p className="mx-auto mt-3 max-w-xl font-mono text-sm text-muted-foreground/80">
+            <p
+              className={cn(
+                "mx-auto mt-3 max-w-xl font-mono text-sm text-muted-foreground/80",
+                HERO_IN,
+                "delay-150",
+              )}
+            >
               The harness is the environment, not a program.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <div
+              className={cn(
+                "mt-8 flex flex-wrap items-center justify-center gap-3",
+                HERO_IN,
+                "delay-200",
+              )}
+            >
               <Link
                 href="#install"
                 className={cn(buttonVariants({ size: "lg" }), "h-11 gap-2 px-5 text-sm")}
@@ -146,11 +165,23 @@ export default function Home() {
               </a>
             </div>
 
-            <div className="mx-auto mt-12 max-w-xl text-left">
-              <Terminal command={INSTALL_CMD} label="install" />
+            <div
+              className={cn(
+                "mx-auto mt-12 max-w-xl text-left",
+                HERO_IN,
+                "delay-300",
+              )}
+            >
+              <InstallTerminal />
             </div>
 
-            <p className="mx-auto mt-4 max-w-xl text-center text-xs text-muted-foreground">
+            <p
+              className={cn(
+                "mx-auto mt-4 max-w-xl text-center text-xs text-muted-foreground",
+                HERO_IN,
+                "delay-300",
+              )}
+            >
               What&apos;s new in{" "}
               <a
                 href={HARNESS_RELEASE.url}
@@ -171,7 +202,13 @@ export default function Home() {
               </a>
             </p>
 
-            <dl className="mx-auto mt-10 grid max-w-2xl grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-4">
+            <dl
+              className={cn(
+                "mx-auto mt-10 grid max-w-2xl grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-4",
+                HERO_IN,
+                "delay-500",
+              )}
+            >
               {STATS.map((s) => (
                 <div key={s.label} className="bg-card px-4 py-5 text-center">
                   <dt className="sr-only">{s.label}</dt>
@@ -192,21 +229,20 @@ export default function Home() {
       <section className="border-b border-border/80 py-20">
         <Container>
           <div className="grid gap-6 md:grid-cols-3">
-            {FEATURES.map((f) => (
-              <div
-                key={f.title}
-                className="rounded-xl border border-border bg-card/40 p-6"
-              >
-                <div className="flex size-10 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary">
-                  <f.icon className="size-5" />
+            {FEATURES.map((f, i) => (
+              <Reveal key={f.title} delay={i * 120} className="h-full">
+                <div className="h-full rounded-xl border border-border bg-card/40 p-6">
+                  <div className="flex size-10 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary">
+                    <f.icon className="size-5" />
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold tracking-tight">
+                    {f.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {f.body}
+                  </p>
                 </div>
-                <h3 className="mt-4 text-lg font-semibold tracking-tight">
-                  {f.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {f.body}
-                </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </Container>
@@ -215,110 +251,123 @@ export default function Home() {
       {/* ── The 40% line ─────────────────────────────────────────────── */}
       <section id="the-40-line" className="scroll-mt-20 border-b border-border/80 py-20">
         <Container>
-          <div className="max-w-2xl">
-            <Eyebrow>
-              <Gauge className="size-3.5 text-primary" />
-              the one rule
-            </Eyebrow>
-            <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
-              The 40% line
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Context occupancy below <strong className="text-foreground">40%</strong>{" "}
-              is the <span className="text-primary">smart zone</span> — comfortable
-              headroom to reason and hold the whole task in view. 40% is a{" "}
-              <span className="text-amber">conservative checkpoint line</span>, not a
-              hard cliff: our own{" "}
-              <Link href="/docs/the-40-line" className="text-foreground underline decoration-primary/40 underline-offset-4 hover:decoration-primary">
-                CIB benchmark
-              </Link>{" "}
-              found that what degrades quality is{" "}
-              <strong className="text-foreground">interference</strong> — competing
-              content in the window — not how full it is. So the mechanisms below
-              earn their keep by keeping that content out.
-            </p>
-          </div>
+          <Reveal>
+            <div className="max-w-2xl">
+              <Eyebrow>
+                <Gauge className="size-3.5 text-primary" />
+                the one rule
+              </Eyebrow>
+              <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
+                The 40% line
+              </h2>
+              <p className="mt-4 text-lg text-muted-foreground">
+                Context occupancy below <strong className="text-foreground">40%</strong>{" "}
+                is the <span className="text-primary">smart zone</span> — comfortable
+                headroom to reason and hold the whole task in view. 40% is a{" "}
+                <span className="text-amber">conservative checkpoint line</span>, not a
+                hard cliff: our own{" "}
+                <Link href="/docs/the-40-line" className="text-foreground underline decoration-primary/40 underline-offset-4 hover:decoration-primary">
+                  CIB benchmark
+                </Link>{" "}
+                found that what degrades quality is{" "}
+                <strong className="text-foreground">interference</strong> — competing
+                content in the window — not how full it is. So the mechanisms below
+                earn their keep by keeping that content out.
+              </p>
+            </div>
+          </Reveal>
 
-          <FortyMeter />
+          <Reveal delay={100}>
+            <FortyMeter />
+          </Reveal>
 
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {MECHANISMS.map((m, i) => (
-              <div
-                key={m.title}
-                className="rounded-xl border border-border bg-card/40 p-6"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="font-mono text-xs text-muted-foreground">
-                    0{i + 1}
-                  </span>
-                  <m.icon className="size-4 text-primary" />
+              <Reveal key={m.title} delay={i * 120} className="h-full">
+                <div className="h-full rounded-xl border border-border bg-card/40 p-6">
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-xs text-muted-foreground">
+                      0{i + 1}
+                    </span>
+                    <m.icon className="size-4 text-primary" />
+                  </div>
+                  <h3 className="mt-3 font-semibold tracking-tight">{m.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {m.body}
+                  </p>
                 </div>
-                <h3 className="mt-3 font-semibold tracking-tight">{m.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {m.body}
-                </p>
-              </div>
+              </Reveal>
             ))}
           </div>
 
-          <div className="mt-8">
-            <Link
-              href="/docs/the-40-line"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
-            >
-              Read the smart/dumb contract
-              <ArrowRight className="size-4" />
-            </Link>
-          </div>
+          <Reveal delay={200}>
+            <div className="mt-8">
+              <Link
+                href="/docs/the-40-line"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+              >
+                Read the smart/dumb contract
+                <ArrowRight className="size-4" />
+              </Link>
+            </div>
+          </Reveal>
         </Container>
       </section>
 
       {/* ── Lifecycle ────────────────────────────────────────────────── */}
       <section id="lifecycle" className="scroll-mt-20 border-b border-border/80 py-20">
         <Container>
-          <div className="max-w-2xl">
-            <Eyebrow>
-              <Workflow className="size-3.5 text-primary" />
-              the state machine
-            </Eyebrow>
-            <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
-              A lifecycle you live inside
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Every requirement is a dual-file plan — a{" "}
-              <code className="font-mono text-sm">.md</code> narrative with a{" "}
-              <code className="font-mono text-sm">stage:</code> field plus a{" "}
-              <code className="font-mono text-sm">.json</code> machine workboard.
-              Work flows through a fixed FSM — and only the main agent may
-              advance it.
-            </p>
-          </div>
+          <Reveal>
+            <div className="max-w-2xl">
+              <Eyebrow>
+                <Workflow className="size-3.5 text-primary" />
+                the state machine
+              </Eyebrow>
+              <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
+                A lifecycle you live inside
+              </h2>
+              <p className="mt-4 text-lg text-muted-foreground">
+                Every requirement is a dual-file plan — a{" "}
+                <code className="font-mono text-sm">.md</code> narrative with a{" "}
+                <code className="font-mono text-sm">stage:</code> field plus a{" "}
+                <code className="font-mono text-sm">.json</code> machine workboard.
+                Work flows through a fixed FSM — and only the main agent may
+                advance it.
+              </p>
+            </div>
+          </Reveal>
 
-          <LifecycleStrip />
+          <Reveal delay={100}>
+            <LifecycleStrip />
+          </Reveal>
 
           <div className="mt-8 grid gap-5 md:grid-cols-2">
-            <div className="rounded-xl border border-border bg-card/40 p-6">
-              <ShieldCheck className="size-5 text-primary" />
-              <h3 className="mt-3 font-semibold tracking-tight">
-                Anti-self-praise firewall
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                No worker promotes its own work to{" "}
-                <code className="font-mono">done</code>. The evaluator grades from
-                a separate window, and only the main agent advances the stage.
-              </p>
-            </div>
-            <div className="rounded-xl border border-border bg-card/40 p-6">
-              <Recycle className="size-5 text-amber" />
-              <h3 className="mt-3 font-semibold tracking-tight">
-                Garden runs orthogonally
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Technical debt is paid in small, continuous installments. The
-                gardener periodically demotes stale context and opens small,
-                green, one-move fixes.
-              </p>
-            </div>
+            <Reveal className="h-full">
+              <div className="h-full rounded-xl border border-border bg-card/40 p-6">
+                <ShieldCheck className="size-5 text-primary" />
+                <h3 className="mt-3 font-semibold tracking-tight">
+                  Anti-self-praise firewall
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  No worker promotes its own work to{" "}
+                  <code className="font-mono">done</code>. The evaluator grades from
+                  a separate window, and only the main agent advances the stage.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={120} className="h-full">
+              <div className="h-full rounded-xl border border-border bg-card/40 p-6">
+                <Recycle className="size-5 text-amber" />
+                <h3 className="mt-3 font-semibold tracking-tight">
+                  Garden runs orthogonally
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  Technical debt is paid in small, continuous installments. The
+                  gardener periodically demotes stale context and opens small,
+                  green, one-move fixes.
+                </p>
+              </div>
+            </Reveal>
           </div>
         </Container>
       </section>
@@ -326,59 +375,63 @@ export default function Home() {
       {/* ── Skills ───────────────────────────────────────────────────── */}
       <section id="skills" className="scroll-mt-20 border-b border-border/80 py-20">
         <Container>
-          <div className="max-w-2xl">
-            <Eyebrow>
-              <Sparkles className="size-3.5 text-primary" />
-              how to do a task
-            </Eyebrow>
-            <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
-              {SKILLS.length} skills, by stage
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Skills encode <em>how</em> to do a task — invoked at the right point
-              in the lifecycle. Install them host-aware with{" "}
-              <code className="font-mono text-sm">agent install &lt;host&gt;</code>{" "}
-              — each of 16 coding-agent hosts gets skills and roles in the dirs it
-              natively reads.
-            </p>
-          </div>
+          <Reveal>
+            <div className="max-w-2xl">
+              <Eyebrow>
+                <Sparkles className="size-3.5 text-primary" />
+                how to do a task
+              </Eyebrow>
+              <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
+                {SKILLS.length} skills, by stage
+              </h2>
+              <p className="mt-4 text-lg text-muted-foreground">
+                Skills encode <em>how</em> to do a task — invoked at the right point
+                in the lifecycle. Install them host-aware with{" "}
+                <code className="font-mono text-sm">agent install &lt;host&gt;</code>{" "}
+                — each of 16 coding-agent hosts gets skills and roles in the dirs it
+                natively reads.
+              </p>
+            </div>
+          </Reveal>
 
           <div className="mt-10 space-y-10">
-            {(Object.keys(STAGE_LABEL) as StageKey[]).map((stage) => {
+            {(Object.keys(STAGE_LABEL) as StageKey[]).map((stage, i) => {
               const items = SKILLS.filter((s) => s.stage === stage);
               if (items.length === 0) return null;
               return (
-                <div key={stage}>
-                  <div className="flex items-center gap-3">
-                    <h3 className="font-mono text-xs uppercase tracking-widest text-primary">
-                      {STAGE_LABEL[stage]}
-                    </h3>
-                    <div className="h-px flex-1 bg-border" />
-                    <span className="font-mono text-xs text-muted-foreground">
-                      {items.length}
-                    </span>
+                <Reveal key={stage} delay={Math.min(i, 3) * 80}>
+                  <div>
+                    <div className="flex items-center gap-3">
+                      <h3 className="font-mono text-xs uppercase tracking-widest text-primary">
+                        {STAGE_LABEL[stage]}
+                      </h3>
+                      <div className="h-px flex-1 bg-border" />
+                      <span className="font-mono text-xs text-muted-foreground">
+                        {items.length}
+                      </span>
+                    </div>
+                    <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                      {items.map((s) => (
+                        <Card
+                          key={s.name}
+                          className="gap-0 border-border bg-card/40 py-0"
+                        >
+                          <CardHeader className="px-5 pt-5">
+                            <CardTitle className="font-mono text-sm">
+                              <span className="text-primary">/</span>
+                              {s.name}
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent className="px-5 pb-5 pt-2">
+                            <p className="text-sm leading-relaxed text-muted-foreground">
+                              {s.blurb}
+                            </p>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
                   </div>
-                  <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {items.map((s) => (
-                      <Card
-                        key={s.name}
-                        className="gap-0 border-border bg-card/40 py-0"
-                      >
-                        <CardHeader className="px-5 pt-5">
-                          <CardTitle className="font-mono text-sm">
-                            <span className="text-primary">/</span>
-                            {s.name}
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent className="px-5 pb-5 pt-2">
-                          <p className="text-sm leading-relaxed text-muted-foreground">
-                            {s.blurb}
-                          </p>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
+                </Reveal>
               );
             })}
           </div>
@@ -388,37 +441,38 @@ export default function Home() {
       {/* ── Sub-agents ───────────────────────────────────────────────── */}
       <section id="agents" className="scroll-mt-20 border-b border-border/80 py-20">
         <Container>
-          <div className="max-w-2xl">
-            <Eyebrow>
-              <Boxes className="size-3.5 text-primary" />
-              who does the work
-            </Eyebrow>
-            <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
-              {AGENTS.length} sub-agents
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Separate context windows are firewalls. Each agent has a role, a
-              model sized to it, and a strict boundary it never crosses.
-            </p>
-          </div>
+          <Reveal>
+            <div className="max-w-2xl">
+              <Eyebrow>
+                <Boxes className="size-3.5 text-primary" />
+                who does the work
+              </Eyebrow>
+              <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
+                {AGENTS.length} sub-agents
+              </h2>
+              <p className="mt-4 text-lg text-muted-foreground">
+                Separate context windows are firewalls. Each agent has a role, a
+                model sized to it, and a strict boundary it never crosses.
+              </p>
+            </div>
+          </Reveal>
 
           <div className="mt-10 grid gap-4 md:grid-cols-2">
-            {AGENTS.map((a) => (
-              <div
-                key={a.name}
-                className="flex flex-col rounded-xl border border-border bg-card/40 p-6"
-              >
-                <div className="flex flex-wrap items-center gap-3">
-                  <h3 className="font-mono text-base font-semibold">{a.name}</h3>
-                  <ModelBadge model={a.model} />
-                  <span className="ml-auto font-mono text-xs text-muted-foreground">
-                    {a.role}
-                  </span>
+            {AGENTS.map((a, i) => (
+              <Reveal key={a.name} delay={(i % 2) * 90} className="h-full">
+                <div className="flex h-full flex-col rounded-xl border border-border bg-card/40 p-6">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <h3 className="font-mono text-base font-semibold">{a.name}</h3>
+                    <ModelBadge model={a.model} />
+                    <span className="ml-auto font-mono text-xs text-muted-foreground">
+                      {a.role}
+                    </span>
+                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {a.blurb}
+                  </p>
                 </div>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {a.blurb}
-                </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </Container>
@@ -429,92 +483,102 @@ export default function Home() {
         <Container>
           <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
             <div className="min-w-0">
-              <Eyebrow>
-                <FileTerminal className="size-3.5 text-primary" />
-                install
-              </Eyebrow>
-              <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
-                Installs like a skill
-              </h2>
-              <p className="mt-4 text-lg text-muted-foreground">
-                Tell your agent <em>“install harness-mini here”</em>, or clone and
-                run the installer. <code className="font-mono text-sm">init.sh</code>{" "}
-                is <strong className="text-foreground">additive</strong> (never
-                overwrites your files) and{" "}
-                <strong className="text-foreground">idempotent</strong> (safe to
-                re-run); it installs the runtime once under{" "}
-                <code className="font-mono text-sm">~/.harness-mini/</code> and{" "}
-                <code className="font-mono text-sm">agent install &lt;host&gt;</code>{" "}
-                then places skills and roles for your coding agent.
-              </p>
+              <Reveal>
+                <Eyebrow>
+                  <FileTerminal className="size-3.5 text-primary" />
+                  install
+                </Eyebrow>
+                <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
+                  Installs like a skill
+                </h2>
+                <p className="mt-4 text-lg text-muted-foreground">
+                  Tell your agent <em>“install harness-mini here”</em>, or clone and
+                  run the installer. <code className="font-mono text-sm">init.sh</code>{" "}
+                  is <strong className="text-foreground">additive</strong> (never
+                  overwrites your files) and{" "}
+                  <strong className="text-foreground">idempotent</strong> (safe to
+                  re-run); it installs the runtime once under{" "}
+                  <code className="font-mono text-sm">~/.harness-mini/</code> and{" "}
+                  <code className="font-mono text-sm">agent install &lt;host&gt;</code>{" "}
+                  then places skills and roles for your coding agent.
+                </p>
+              </Reveal>
 
               <div className="mt-6 space-y-4">
-                <div className="rounded-xl border border-border bg-card/40 p-5">
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="size-4 text-primary" />
-                    <h3 className="font-semibold tracking-tight">
-                      New / empty project
-                    </h3>
+                <Reveal delay={100}>
+                  <div className="rounded-xl border border-border bg-card/40 p-5">
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="size-4 text-primary" />
+                      <h3 className="font-semibold tracking-tight">
+                        New / empty project
+                      </h3>
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      Generative bootstrap — seeds an intake plan and runs the
+                      founder funnel:{" "}
+                      <code className="font-mono text-xs">
+                        founder-check → to-prd → to-issues
+                      </code>
+                      .
+                    </p>
                   </div>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Generative bootstrap — seeds an intake plan and runs the
-                    founder funnel:{" "}
-                    <code className="font-mono text-xs">
-                      founder-check → to-prd → to-issues
-                    </code>
-                    .
-                  </p>
-                </div>
-                <div className="rounded-xl border border-border bg-card/40 p-5">
-                  <div className="flex items-center gap-2">
-                    <ScanSearch className="size-4 text-amber" />
-                    <h3 className="font-semibold tracking-tight">
-                      Existing project
-                    </h3>
+                </Reveal>
+                <Reveal delay={180}>
+                  <div className="rounded-xl border border-border bg-card/40 p-5">
+                    <div className="flex items-center gap-2">
+                      <ScanSearch className="size-4 text-amber" />
+                      <h3 className="font-semibold tracking-tight">
+                        Existing project
+                      </h3>
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      Recon graft — installs additively and seeds a recon plan; the
+                      explorer maps your codebase into{" "}
+                      <code className="font-mono text-xs">.harness-mini/architecture.md</code>.
+                    </p>
                   </div>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Recon graft — installs additively and seeds a recon plan; the
-                    explorer maps your codebase into{" "}
-                    <code className="font-mono text-xs">.harness-mini/architecture.md</code>.
-                  </p>
-                </div>
+                </Reveal>
               </div>
             </div>
 
             <div className="min-w-0 lg:sticky lg:top-24">
-              <Terminal command={INSTALL_CMD} label="bash" />
-              <p className="mt-4 text-sm text-muted-foreground">
-                Zero intrusion: the runtime, docs, and locks live under{" "}
-                <code className="font-mono text-xs">~/.harness-mini/</code>. The
-                project receives only{" "}
-                <code className="font-mono text-xs">.harness-mini/</code> (plans,
-                trace, architecture), one marked block in{" "}
-                <code className="font-mono text-xs">AGENTS.md</code>, and your
-                host&apos;s skills/agents dirs — your{" "}
-                <code className="font-mono text-xs">.gitignore</code> is never
-                edited.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <a
-                  href={REPO_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={cn(buttonVariants({ size: "lg" }), "h-11 gap-2 px-5 text-sm")}
-                >
-                  <GithubIcon className="size-4" />
-                  View on GitHub
-                </a>
-                <Link
-                  href="/docs"
-                  className={cn(
-                    buttonVariants({ variant: "outline", size: "lg" }),
-                    "h-11 gap-2 px-5 text-sm",
-                  )}
-                >
-                  Read the docs
-                  <ArrowRight className="size-4" />
-                </Link>
-              </div>
+              <Reveal delay={150}>
+                <InstallTerminal />
+                <p className="mt-4 text-sm text-muted-foreground">
+                  Zero intrusion: the runtime, docs, and locks live under{" "}
+                  <code className="font-mono text-xs">~/.harness-mini/</code>. The
+                  project receives only{" "}
+                  <code className="font-mono text-xs">.harness-mini/</code> (plans,
+                  trace, architecture), one marked block in{" "}
+                  <code className="font-mono text-xs">AGENTS.md</code>, and your
+                  host&apos;s skills/agents dirs — your{" "}
+                  <code className="font-mono text-xs">.gitignore</code> is never
+                  edited.
+                </p>
+              </Reveal>
+              <Reveal delay={250}>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <a
+                    href={REPO_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={cn(buttonVariants({ size: "lg" }), "h-11 gap-2 px-5 text-sm")}
+                  >
+                    <GithubIcon className="size-4" />
+                    View on GitHub
+                  </a>
+                  <Link
+                    href="/docs"
+                    className={cn(
+                      buttonVariants({ variant: "outline", size: "lg" }),
+                      "h-11 gap-2 px-5 text-sm",
+                    )}
+                  >
+                    Read the docs
+                    <ArrowRight className="size-4" />
+                  </Link>
+                </div>
+              </Reveal>
             </div>
           </div>
         </Container>
