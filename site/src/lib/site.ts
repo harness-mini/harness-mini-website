@@ -33,9 +33,9 @@ export const SITE_DESCRIPTION =
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.14.1", // x-release-tag
-  date: "2026-11-08", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.14.1", // x-release-url
+  tag: "v0.15.0", // x-release-tag
+  date: "2026-11-11", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.15.0", // x-release-url
   headline: "Per-project state now lives under ~/.harness-mini/projects/<project-id>/ (moved automatically), so the top of HARNESS_HOME holds only the runtime — plus a garden sweep that makes the docs match the code (harness.sh diff, the update --force downgrade guard).",
 } as const;
 
