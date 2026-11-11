@@ -36,7 +36,7 @@ export const HARNESS_RELEASE = {
   tag: "v0.15.0", // x-release-tag
   date: "2026-11-11", // x-release-date
   url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.15.0", // x-release-url
-  headline: "Per-project state now lives under ~/.harness-mini/projects/<project-id>/ (moved automatically), so the top of HARNESS_HOME holds only the runtime — plus a garden sweep that makes the docs match the code (harness.sh diff, the update --force downgrade guard).",
+  headline: "Getting Bearings now runs a file-truth report (session-bearings.sh): paste its output, never restate selected_slice/workboard/last_green from memory. Plus a workboard parsing fix that pairs each passes value with the right slice id — status names the real next: slice — and CI running the full test suite on Ubuntu + macOS with shellcheck.",
 } as const;
 
 /** Short version string, derived from {@link HARNESS_RELEASE}. */
@@ -97,7 +97,7 @@ export type Skill = {
 export const SKILLS: Skill[] = [
   { name: "stage-viewer", stage: "orchestrate", blurb: "The single authority that moves a plan through the FSM. Main-agent only — no sub-agent self-promotes. Documents a plan-stage write ban (convention only) for intake/prd/issues — no product-code edits until the walking skeleton is authorized." },
   { name: "session-init", stage: "orchestrate", blurb: "Plan-layer playbook for boards where status prints path: init — founder funnel, PRD, issues, the JSON twin. Branches on the board (greenfield · recon seed · stuck stage · broken twin) and enforces the write ban: no product code on this path." },
-  { name: "session-coding", stage: "orchestrate", blurb: "Coding playbook for path: coding boards. First turn is a mandatory five-step Getting Bearings (pwd · status + recent commits + latest checkpoint · select the next passes:false slice · app baseline green — never the harness installer · report the slice), then exactly one slice, test-first, routed through evaluate." },
+  { name: "session-coding", stage: "orchestrate", blurb: "Coding playbook for path: coding boards. First turn is a mandatory five-step Getting Bearings anchored on a file-truth report — run session-bearings.sh and quote its output (never restate selected_slice/workboard/last_green from memory) · confirm root: · take selected_slice from the report · app baseline green — never the harness installer · report the slice — then exactly one slice, test-first, routed through evaluate." },
   { name: "ralph-loop", stage: "orchestrate", blurb: "Drive a long-running work → check → repeat loop until criteria pass or a human-judgment flag is raised." },
   { name: "checkpoint", stage: "orchestrate", blurb: "Write a committed handoff while context is sharp. Includes structured Footprint entries, validated source-line snapshots, no-op suppression, and last-green test evidence." },
   { name: "grill-me", stage: "orchestrate", blurb: "Interview the user relentlessly about a plan until every branch of the decision tree is resolved." },

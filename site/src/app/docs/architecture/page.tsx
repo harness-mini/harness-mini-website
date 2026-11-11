@@ -162,8 +162,12 @@ ready: ready — slice-002: write the failing 401 test, then bcrypt verification
           <li>
             <code>path: coding</code> → the <code>session-coding</code> skill: a
             mandatory five-step <strong>Getting Bearings</strong> first turn,
-            then exactly <strong>one slice</strong>, test-first, verified
-            against the twin&apos;s <code>steps</code> and routed through{" "}
+            anchored on the{" "}
+            <code>session-bearings.sh</code> file-truth report — paste its
+            output, never restate <code>selected_slice</code>/
+            <code>workboard</code>/<code>last_green</code> from memory — then
+            exactly <strong>one slice</strong>, test-first, verified against
+            the twin&apos;s <code>steps</code> and routed through{" "}
             <code>evaluate</code>.
           </li>
           <li>
