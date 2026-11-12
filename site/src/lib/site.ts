@@ -33,9 +33,9 @@ export const SITE_DESCRIPTION =
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.15.0", // x-release-tag
-  date: "2026-11-11", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.15.0", // x-release-url
+  tag: "v0.15.1", // x-release-tag
+  date: "2026-11-12", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.15.1", // x-release-url
   headline: "Getting Bearings now runs a file-truth report (session-bearings.sh): paste its output, never restate selected_slice/workboard/last_green from memory. Plus a workboard parsing fix that pairs each passes value with the right slice id — status names the real next: slice — and CI running the full test suite on Ubuntu + macOS with shellcheck.",
 } as const;
 
