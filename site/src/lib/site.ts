@@ -36,7 +36,7 @@ export const HARNESS_RELEASE = {
   tag: "v0.16.0", // x-release-tag
   date: "2026-11-13", // x-release-date
   url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.16.0", // x-release-url
-  headline: "Refactor release: the status, doctor and update report commands in bin/harness.sh become thin dispatchers over named per-section functions — the three longest functions (214/149/96 lines) shrink to 19/29/22 with zero behavior change, proven by byte-identical output snapshots against frozen pins.",
+  headline: "Test selection for the TDD inner loop: bash tests/run.sh <group> runs any of 48 groups (984 assertions) and tests/affected.sh maps your diff to the affected groups — red→green turns take seconds instead of the ~3-minute full suite, while gates (checkpoint, evaluate, release) and CI still run everything. The no-argument path is byte-identical to before.",
 } as const;
 
 /** Short version string, derived from {@link HARNESS_RELEASE}. */
