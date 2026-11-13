@@ -33,10 +33,10 @@ export const SITE_DESCRIPTION =
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.16.0", // x-release-tag
+  tag: "v0.17.0", // x-release-tag
   date: "2026-11-13", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.16.0", // x-release-url
-  headline: "Test selection for the TDD inner loop: bash tests/run.sh <group> runs any of 48 groups (984 assertions) and tests/affected.sh maps your diff to the affected groups — red→green turns take seconds instead of the ~3-minute full suite, while gates (checkpoint, evaluate, release) and CI still run everything. The no-argument path is byte-identical to before.",
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.17.0", // x-release-url
+  headline: "The plan archive gets a verifier: checkpoint-archive-check.sh fails on dirty plan files (a git mv stages the rename, not your stage:/passes edits — stale board metadata shipped twice) and on completed plans that are not fully done — and its first run caught nine completed plans (0047–0055) whose twins still said in_progress. All repaired; legacy pre-contract plans are exempt, matching the eval-gate's stance.",
 } as const;
 
 /** Short version string, derived from {@link HARNESS_RELEASE}. */
