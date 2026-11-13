@@ -36,7 +36,7 @@ export const HARNESS_RELEASE = {
   tag: "v0.15.1", // x-release-tag
   date: "2026-11-12", // x-release-date
   url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.15.1", // x-release-url
-  headline: "Getting Bearings now runs a file-truth report (session-bearings.sh): paste its output, never restate selected_slice/workboard/last_green from memory. Plus a workboard parsing fix that pairs each passes value with the right slice id — status names the real next: slice — and CI running the full test suite on Ubuntu + macOS with shellcheck.",
+  headline: "Refactor release: the status, doctor and update report commands in bin/harness.sh become thin dispatchers over named per-section functions — the three longest functions (214/149/96 lines) shrink to 19/29/22 with zero behavior change, proven by byte-identical output snapshots against frozen pins.",
 } as const;
 
 /** Short version string, derived from {@link HARNESS_RELEASE}. */
