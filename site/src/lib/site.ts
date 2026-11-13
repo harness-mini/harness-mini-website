@@ -33,9 +33,9 @@ export const SITE_DESCRIPTION =
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.15.1", // x-release-tag
-  date: "2026-11-12", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.15.1", // x-release-url
+  tag: "v0.16.0", // x-release-tag
+  date: "2026-11-13", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.16.0", // x-release-url
   headline: "Refactor release: the status, doctor and update report commands in bin/harness.sh become thin dispatchers over named per-section functions — the three longest functions (214/149/96 lines) shrink to 19/29/22 with zero behavior change, proven by byte-identical output snapshots against frozen pins.",
 } as const;
 
