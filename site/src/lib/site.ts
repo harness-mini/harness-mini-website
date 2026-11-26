@@ -33,9 +33,9 @@ export const SITE_DESCRIPTION =
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.17.1", // x-release-tag
-  date: "2026-11-13", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.17.1", // x-release-url
+  tag: "v0.18.0", // x-release-tag
+  date: "2026-11-26", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.18.0", // x-release-url
   headline: "The test runner now audits its own group counts: at the end of every run it compares --list's statically predicted assert counts against what actually executed and prints a non-blocking predictor-drift warning on mismatch — so the TDD inner loop can trust the group table it picks tests from. README stops hardcoding counts; --list is the single source.",
 } as const;
 
