@@ -109,9 +109,10 @@ export default function ArchitecturePage() {
             frontmatter (<code>stage:</code>) — the lifecycle authority —
             mirrored by a same-basename <strong>JSON twin</strong> (
             <code>status</code>, <code>current_slice_id</code>,{" "}
-            <code>slices[].passes</code>). <code>passes</code> flips to true only
-            via the main agent <em>after an evaluator verdict</em>; the twin&apos;s{" "}
-            <code>steps</code> are test conditions and are never altered.
+            <code>slices[].passes</code>). After the main agent reruns the full
+            suite successfully, it may flip <code>passes</code> to true; JSON
+            <code>steps</code> name concrete checks (commands, assertion names, or
+            file/JSON facts) and are never altered.
           </li>
           <li>
             <strong>Transition authority:</strong> agents work freely <em>within</em>{" "}
@@ -119,14 +120,15 @@ export default function ArchitecturePage() {
             <code>stage-viewer</code>) advances the FSM. No sub-agent may mark its
             own output “done” — the evaluator gate plus main-agent control is the
             anti-self-praise firewall, extended across the whole lifecycle.
-            Evaluation is <strong>tiered by risk</strong> (L0 self-check · L1
-            lightweight reviewer · L2 full Opus); the firewall is the{" "}
-            <em>separate context</em>, not the model. The gate has teeth: every
-            evaluation writes a committed verdict to{" "}
-            <code>.harness-mini/trace/evals/&lt;plan&gt;-NNN.md</code>, and{" "}
-            <code>stage-viewer</code> won&apos;t promote a plan to{" "}
-            <code>done</code> without a <code>verdict: pass</code> —{" "}
-            <code>doctor</code> <strong>fails</strong> any that slips through.
+            With v0.18.0, a full-suite run verifies a green slice and evaluation
+            happens once per plan. Use a separate-context reviewer before{" "}
+            <code>done</code> only when a criterion needs judgment (L2 for
+            architecture, security, data-loss, or public APIs); fan-out also
+            reviews the skeleton and integration. The firewall is the{" "}
+            <em>separate context</em>, not the model. The committed verdict at{" "}
+            <code>.harness-mini/trace/evals/&lt;plan&gt;-NNN.md</code> gates{" "}
+            <code>done</code>; <code>doctor</code> <strong>fails</strong> a done
+            plan without <code>verdict: pass</code>.
           </li>
           <li>
             <strong>Plan-stage write ban</strong> (convention only — no permission
