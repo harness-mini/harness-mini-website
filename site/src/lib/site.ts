@@ -33,10 +33,10 @@ export const SITE_DESCRIPTION =
  * markers are the anchors the bot rewrites — keep them on these lines.
  */
 export const HARNESS_RELEASE = {
-  tag: "v0.17.1", // x-release-tag
-  date: "2026-11-13", // x-release-date
-  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.17.1", // x-release-url
-  headline: "The test runner now audits its own group counts: at the end of every run it compares --list's statically predicted assert counts against what actually executed and prints a non-blocking predictor-drift warning on mismatch — so the TDD inner loop can trust the group table it picks tests from. README stops hardcoding counts; --list is the single source.",
+  tag: "v0.18.0", // x-release-tag
+  date: "2026-11-26", // x-release-date
+  url: "https://github.com/harness-mini/harness-mini/releases/tag/v0.18.0", // x-release-url
+  headline: "Evaluation now runs once per plan: a green slice is verified by a full-suite run, with separate-context review before done only when a criterion needs judgment. JSON slice steps are explicit checks (commands, assertion names, or file/JSON facts), and TDD cites the failing assertion by name.",
 } as const;
 
 /** Short version string, derived from {@link HARNESS_RELEASE}. */
@@ -103,13 +103,13 @@ export const SKILLS: Skill[] = [
   { name: "grill-me", stage: "orchestrate", blurb: "Interview the user relentlessly about a plan until every branch of the decision tree is resolved." },
   { name: "founder-check", stage: "intake", blurb: "Greenfield-only gate: who is the user, the smallest valuable slice, the riskiest assumption, the BML loop." },
   { name: "to-prd", stage: "plan", blurb: "Turn a raw idea into an executable PRD — a versioned, agent-readable, testable source of truth." },
-  { name: "to-issues", stage: "plan", blurb: "Decompose a PRD into atomic, independently verifiable issues — one vertical slice each." },
+  { name: "to-issues", stage: "plan", blurb: "Decompose a PRD into atomic, independently verifiable issues — one vertical slice each, with JSON steps written as commands, assertion names, or file/JSON facts." },
   { name: "tdd", stage: "implement", blurb: "Red → green → refactor. Never write implementation before a failing test; never refactor on red." },
   { name: "slice-coding", stage: "implement", blurb: "Vertical (one feature end-to-end first) + horizontal (forward-only layering). Read before writing code." },
   { name: "parallel-slices", stage: "implement", blurb: "The implement stage's write fan-out: once the vertical skeleton passes evaluate, build the independent issues in parallel — one generator each, gated on disjoint file footprints — then a single integration evaluate." },
   { name: "clean-code", stage: "implement", blurb: "The forward quality constraint: intention-revealing names, small functions, no duplication, why-not-what comments." },
   { name: "refactor", stage: "implement", blurb: "The recovery constraint: smell → named refactoring, always under green tests, one move at a time." },
-  { name: "evaluate", stage: "evaluate", blurb: "Grade work against acceptance criteria from a separate context, tiered by risk: L0 self-check · L1 lightweight reviewer (default) · L2 full Opus. The firewall is the separate context, not the model — and it writes a committed verdict to .harness-mini/trace/evals/, so \"done\" is earned, not self-declared." },
+  { name: "evaluate", stage: "evaluate", blurb: "Run the full suite once per plan; a green slice is L0 evidence. Use a separate-context reviewer once before done only when a criterion needs judgment (L2 for high-risk work). Fan-out also reviews the skeleton and integration." },
   { name: "release", stage: "maintain", blurb: "Cut a versioned release — bump VERSION, roll the CHANGELOG, tag, and publish a GitHub release. Wraps bin/harness.sh release; owns the semver + changelog judgment the script can't." },
   { name: "garden", stage: "maintain", blurb: "Entropy GC: scan for drift — stale docs, dead context, smells — and open small targeted fixes. Fires on concrete signals — a checkpoint cadence (≥5 since the last sweep) and a committed smell backlog — not a vague \"periodically.\"" },
 ];
